@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SwiftyFitsize_Example' do
+  pod 'SwiftyFitsize', :path => '../'
+
+  target 'SwiftyFitsize_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,16 @@
+PODS:
+  - SwiftyFitsize (0.1.0)
+
+DEPENDENCIES:
+  - SwiftyFitsize (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftyFitsize:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftyFitsize: 266feed14027ac61ad97ef503400f89132c58a1c
+
+PODFILE CHECKSUM: d3fc970435858bcc0902a401f4d222ba5aeb1bbf
+
+COCOAPODS: 1.6.0.beta.1
