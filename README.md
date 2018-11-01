@@ -33,6 +33,24 @@ UIEdgeInsetsMake(10, 10, 10, 10)~
 SwiftyFitsize.reference(width: 414)
 ```
 
+Support xib and storyboard
+
+- Font Fitsize
+
+`UILabel` `UIButton` `UITextView` `UITextField`
+
+![xib-font](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/xib-font.png)
+
+
+
+- Constraint Fitsize
+
+
+
+![xib-font](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/xib-constraint.png)
+
+
+
 ## Exhibition
 
 ![image](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/exhibition.png)

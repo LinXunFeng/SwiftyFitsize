@@ -26,6 +26,7 @@ public final class SwiftyFitsize {
     }
 }
 
+// MARK:- SwiftyFitsize
 postfix operator ~
 
 public postfix func ~ (value: CGFloat) -> CGFloat {
@@ -62,10 +63,49 @@ public postfix func ~ (value: CGRect) -> CGRect {
     )
 }
 public postfix func ~ (value: UIEdgeInsets) -> UIEdgeInsets {
-    return UIEdgeInsetsMake(
-        value.top~,
-        value.left~,
-        value.bottom~,
-        value.right~
+    return UIEdgeInsets(
+        top: value.top~,
+        left: value.left~,
+        bottom: value.bottom~,
+        right: value.right~
     )
+}
+
+
+// MARK:- Xib/Storyboard
+public extension NSLayoutConstraint {
+    @IBInspectable private(set) var swiftyFitsize : Bool {
+        get { return true }
+        set {
+            if newValue { constant = constant~ }
+        }
+    }
+}
+
+public extension UILabel {
+    @IBInspectable private(set) var fontFitsize : Bool {
+        get { return true }
+        set { if newValue { font = font~ } }
+    }
+}
+
+public extension UITextView {
+    @IBInspectable private(set) var fontFitsize : Bool {
+        get { return true }
+        set { if newValue, let xfont = font { font = xfont~ } }
+    }
+}
+
+public extension UITextField {
+    @IBInspectable private(set) var fontFitsize : Bool {
+        get { return true }
+        set { if newValue, let xfont = font { font = xfont~ } }
+    }
+}
+
+public extension UIButton {
+    @IBInspectable private(set) var fontFitsize : Bool {
+        get { return true }
+        set { if newValue, let xfont = titleLabel?.font { self.titleLabel?.font = xfont~ } }
+    }
 }

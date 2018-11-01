@@ -2,6 +2,8 @@ use_frameworks!
 
 target 'SwiftyFitsize_Example' do
   pod 'SwiftyFitsize', :path => '../'
+  
+  pod 'LXFProtocolTool/LXFNibloadable'
 
   target 'SwiftyFitsize_Tests' do
     inherit! :search_paths

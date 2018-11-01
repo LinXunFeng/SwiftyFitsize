@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftyFitsize'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = '📱 Swifty screen adaptation solution'
   s.homepage         = 'https://github.com/LinXunFeng/SwiftyFitsize'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/LinXunFeng/SwiftyFitsize.git', :tag => s.version.to_s }
 
   s.source_files = 'Sources/*.swift'
-  s.swift_version = '4.0'
+  s.swift_version = '4.2'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 end

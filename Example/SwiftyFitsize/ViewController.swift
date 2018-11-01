@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyFitsize
+import LXFProtocolTool
 
 class ViewController: UIViewController {
     
@@ -38,8 +39,16 @@ class ViewController: UIViewController {
         frame.origin.y = fitLabelY~
         fitLabel.frame = frame
         
-        let redViewFrame = CGRect(x: 15, y: fitLabelY + 50, width: 100, height: 100)
+        let redViewFrame = CGRect(
+            x: fitLabelX,
+            y: fitLabelY + 50,
+            width: 100,
+            height: 100)
         redView.frame = redViewFrame~
+        
+        let fitsizeView = FitsizeView.loadFromNib()
+        self.view.addSubview(fitsizeView)
+        fitsizeView.frame = CGRect(x: 0, y: redViewFrame~.maxY, width: 328~, height: 298~)
     }
 }
 

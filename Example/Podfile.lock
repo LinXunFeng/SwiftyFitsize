@@ -1,16 +1,23 @@
 PODS:
-  - SwiftyFitsize (0.1.0)
+  - LXFProtocolTool/LXFNibloadable (0.6.0)
+  - SwiftyFitsize (0.2.0)
 
 DEPENDENCIES:
+  - LXFProtocolTool/LXFNibloadable
   - SwiftyFitsize (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - LXFProtocolTool
 
 EXTERNAL SOURCES:
   SwiftyFitsize:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwiftyFitsize: 266feed14027ac61ad97ef503400f89132c58a1c
+  LXFProtocolTool: bf47b835b5c0e7daee733e753937b4fca39a25f6
+  SwiftyFitsize: aded945afdfc2e10583548649360ca21ed745739
 
-PODFILE CHECKSUM: d3fc970435858bcc0902a401f4d222ba5aeb1bbf
+PODFILE CHECKSUM: 3a1c940faad999737c15f7075775640534625533
 
 COCOAPODS: 1.6.0.beta.1

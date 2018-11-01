@@ -15,6 +15,8 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		AD29D4865A6CC04E6C095CE8 /* Pods_SwiftyFitsize_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C29A31108B343C0CF422BD2 /* Pods_SwiftyFitsize_Tests.framework */; };
 		DAECACDAC60C720D74F77715 /* Pods_SwiftyFitsize_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B03DD5D34EB0F783BFE6B8D /* Pods_SwiftyFitsize_Example.framework */; };
+		FD117905218AE778001CBB26 /* FitsizeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD117904218AE778001CBB26 /* FitsizeView.xib */; };
+		FD117909218AE963001CBB26 /* FitsizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD117908218AE963001CBB26 /* FitsizeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F39449069E67D0AFAF81865 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		1F39449069E67D0AFAF81865 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		42D9BD18CAE46BCED2322B05 /* Pods-SwiftyFitsize_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_Example.release.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_Example/Pods-SwiftyFitsize_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* SwiftyFitsize_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyFitsize_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,9 +46,11 @@
 		9316AD6C19594A8107F2CA5B /* Pods-SwiftyFitsize_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_Tests/Pods-SwiftyFitsize_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B03DD5D34EB0F783BFE6B8D /* Pods_SwiftyFitsize_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyFitsize_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C29A31108B343C0CF422BD2 /* Pods_SwiftyFitsize_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyFitsize_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE7798381C8FED4CEF4E3272 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		BE7798381C8FED4CEF4E3272 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C93EBAA62B419E5CDC9E1495 /* Pods-SwiftyFitsize_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_Tests.release.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_Tests/Pods-SwiftyFitsize_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E6F933659A20197919B99384 /* SwiftyFitsize.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SwiftyFitsize.podspec; path = ../SwiftyFitsize.podspec; sourceTree = "<group>"; };
+		E6F933659A20197919B99384 /* SwiftyFitsize.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftyFitsize.podspec; path = ../SwiftyFitsize.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		FD117904218AE778001CBB26 /* FitsizeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FitsizeView.xib; sourceTree = "<group>"; };
+		FD117908218AE963001CBB26 /* FitsizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitsizeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +90,6 @@
 				9316AD6C19594A8107F2CA5B /* Pods-SwiftyFitsize_Tests.debug.xcconfig */,
 				C93EBAA62B419E5CDC9E1495 /* Pods-SwiftyFitsize_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -117,6 +120,8 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				FD117904218AE778001CBB26 /* FitsizeView.xib */,
+				FD117908218AE963001CBB26 /* FitsizeView.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -247,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				FD117905218AE778001CBB26 /* FitsizeView.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -315,12 +321,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SwiftyFitsize_Example/Pods-SwiftyFitsize_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/LXFProtocolTool/LXFProtocolTool.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyFitsize/SwiftyFitsize.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LXFProtocolTool.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyFitsize.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD117909218AE963001CBB26 /* FitsizeView.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
@@ -488,7 +497,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -503,7 +512,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
