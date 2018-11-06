@@ -1,0 +1,48 @@
+desc 'Usage help'
+lane :usage do |options|
+  UI.message("input")
+  UI.message("fastlane release version:{version_number}") 
+  UI.message("or")
+  UI.message("fastlane release version:{version_number} message:{version_message}") 
+end
+
+desc 'Release new version'
+lane :release do |options|
+
+  target_version = options[:version]
+  version_message = options[:message]
+  raise "The version is missed. Use `fastlane release version:{version_number}`.`" if target_version.nil?
+  
+  version_bump_podspec(
+    path: "SwiftyFitsize.podspec", 
+    version_number: target_version
+  )
+
+  git_add(path: ".")
+  git_commit(path: ".", message: "Bump version to #{target_version}")
+
+  if git_tag_exists(tag: target_version)
+    UI.message("remote the existing tag #{target_version} automatically") 
+    remove_git_tag(tagNum: target_version)
+  end
+
+  if version_message.nil?
+    add_git_tag(
+      tag: target_version
+    )
+  else
+    add_git_tag(
+      tag: target_version,
+      message: version_message
+    )
+  end
+
+  
+  push_git_tags
+  push_to_git_remote
+
+  pod_lib_lint(allow_warnings: true)
+
+  pod_push
+
+end
