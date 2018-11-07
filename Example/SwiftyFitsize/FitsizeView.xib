@@ -23,6 +23,9 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="fontFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fontFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzO-l3-M6H">
@@ -32,41 +35,62 @@
                         <constraint firstAttribute="height" constant="200" id="ncR-Ck-omF">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </constraint>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nzO-l3-M6H" secondAttribute="trailing" constant="50" id="L1C-yl-xdI">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="0Rq-ne-vi5" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="Mlf-Xb-D9R">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="nzO-l3-M6H" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="RNC-fg-OQQ">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="0Rq-ne-vi5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="dCY-4m-NGp">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="nzO-l3-M6H" firstAttribute="top" secondItem="0Rq-ne-vi5" secondAttribute="bottom" constant="40" id="fSu-Vd-k9t">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0Rq-ne-vi5" secondAttribute="trailing" constant="20" id="hXC-cK-1sL">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="swiftyFitsize" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
             </constraints>
