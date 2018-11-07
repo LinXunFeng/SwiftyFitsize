@@ -7,20 +7,24 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+克隆或下载仓库到本地后，请先运行 `pod install` , 再打开 `SwiftyFitsize.xcworkspace
 
 ## Requirements
 
+- iOS 9.0+
+- Xcode 10.0+
+
 ## Installation
 
-SwiftyFitsize is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+- Cocoapods
 
 ```ruby
 pod 'SwiftyFitsize'
 ```
 
 ## Usage
+
+`~` : 当设备为 `iPad` 时，适配后的值会与 `iPadFitMultiple` 相乘
 
 ```swift
 100~
@@ -29,31 +33,66 @@ CGPoint(x: 10, y: 10)~
 CGRect(x: 10, y: 10, width: 100, height: 100)~
 UIEdgeInsetsMake(10, 10, 10, 10)~
 
-// modify reference width，default 375
-SwiftyFitsize.reference(width: 414)
+/// 设置参照的相关参数
+///
+/// - Parameters:
+///   - width: 参照的宽度
+///   - iPadFitMultiple: iPad 在适配后所得值的倍数 (0 , 1]
+SwiftyFitsize.reference(width: 414, iPadFitMultiple: 0.5)
 ```
 
-Support xib and storyboard
+
+
+`≈`  (option + x)  适配后的值不会与 `iPadFitMultiple` 相乘
+
+```swift
+100≈
+UIFont.systemFont(ofSize: 14)≈
+CGPoint(x: 10, y: 10)≈
+CGRect(x: 10, y: 10, width: 100, height: 100)≈
+UIEdgeInsetsMake(10, 10, 10, 10)≈
+```
+
+
+
+##### Support xib and storyboard
+
+```swift
+@objc public enum SwiftyFitType: Int, RawRepresentable {
+    /// Original Value
+    case none = 0
+    /// ~
+    case flexible = 1
+    /// ≈
+    case force = 2
+}
+```
 
 - Font Fitsize
 
-`UILabel` `UIButton` `UITextView` `UITextField`
+支持的UI控件有： `UILabel` `UIButton` `UITextView` `UITextField`
 
-![xib-font](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/xib-font.png)
+`FontFitType` 的值请参考上方的 `enum SwiftyFitType`
+
+![xib-font](./Screenshots/xib-font.png)
 
 
 
 - Constraint Fitsize
 
+约束适配同上
 
-
-![xib-font](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/xib-constraint.png)
+![xib-font](./Screenshots/xib-constraint.png)
 
 
 
 ## Exhibition
 
 ![image](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/exhibition.png)
+
+
+
+![](./Screenshots/ipad.png)
 
 ## Author
 
