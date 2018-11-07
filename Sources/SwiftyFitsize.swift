@@ -8,7 +8,6 @@
 
 import UIKit
 
-/// 
 @objc public enum SwiftyFitType: Int, RawRepresentable {
     /// Original Value
     case none = 0
@@ -124,7 +123,7 @@ public postfix func ≈ (value: CGFloat) -> CGFloat {
     return SwiftyFitsize.shared.fitNumberSize(value, fitType: .force)
 }
 public postfix func ≈ (font: UIFont) -> UIFont {
-    return UIFont(name: font.fontName, size: font.pointSize~) ?? font
+    return UIFont(name: font.fontName, size: font.pointSize≈) ?? font
 }
 public postfix func ≈ (value: Int) -> CGFloat {
     return CGFloat(value)≈
