@@ -86,7 +86,7 @@ SwiftyFitsize.reference(width: 414, iPadFitMultiple: 0.5)
 ##### 二、支持 xib 和 storyboard
 
 ```swift
-@objc public enum SwiftyFitType: Int, RawRepresentable {
+enum SwiftyFitType: Int {
     /// Original Value
     case none = 0
     /// ~
