@@ -30,7 +30,7 @@ pod 'SwiftyFitsize'
 
 
 
-![iPad](/Users/LXF/Desktop/LXF/GitHub/SwiftyFitsize/Screenshots/ipad.png)
+![iPad](./Screenshots/ipad.png)
 
 
 
