@@ -26,11 +26,11 @@ pod 'SwiftyFitsize'
 
 ## Exhibition
 
-![image](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/exhibition.png)
+![iPhone](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/exhibition.png)
 
 
 
-![](/Users/LXF/Desktop/LXF/GitHub/SwiftyFitsize/Screenshots/ipad.png)
+![iPad](/Users/LXF/Desktop/LXF/GitHub/SwiftyFitsize/Screenshots/ipad.png)
 
 
 
