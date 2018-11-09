@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public enum SwiftyFitType: Int, RawRepresentable {
+@objc public enum SwiftyFitType: Int {
     /// Original Value
     case none = 0
     /// ~
