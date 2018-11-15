@@ -6,9 +6,13 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'LinXunFeng' => '598600855@qq.com' }
   s.source           = { :git => 'https://github.com/LinXunFeng/SwiftyFitsize.git', :tag => s.version.to_s }
-
-  s.source_files = 'Sources/*.swift'
+  
   s.swift_version = '4.2'
-
   s.ios.deployment_target = '9.0'
+
+  s.source_files = ['Sources/*.swift', 'Sources/SwiftyFitsize.h']
+  s.public_header_files = ['Sources/SwiftyFitsize.h']
+  
+  s.requires_arc = true
+  
 end

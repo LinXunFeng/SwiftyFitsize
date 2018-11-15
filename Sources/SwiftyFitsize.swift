@@ -19,21 +19,25 @@ import UIKit
 
 fileprivate let ScreenW = UIScreen.main.bounds.width
 
-public final class SwiftyFitsize {
+@objc public final class SwiftyFitsize: NSObject {
     static let shared = SwiftyFitsize()
-    private init() { }
+    private override init() { }
+    
+    @objc public class func sharedSwiftyFitsize() -> SwiftyFitsize {
+        return SwiftyFitsize.shared
+    }
     
     /// 默认参照宽度
-    private var referenceW: CGFloat = 375
+    @objc public private(set) var referenceW: CGFloat = 375
     /// 默认 iPad 适配缩放倍数 (0 , 1]
-    private var iPadFitMultiple: CGFloat = 0.5
+    @objc public private(set) var iPadFitMultiple: CGFloat = 0.5
     
     /// 设置参照的相关参数
     ///
     /// - Parameters:
     ///   - width: 参照的宽度
     ///   - iPadFitMultiple: iPad 在适配后所得值的倍数 (0 , 1]
-    public static func reference(
+    @objc public static func reference(
         width: CGFloat,
         iPadFitMultiple: CGFloat
     ) {
@@ -165,7 +169,7 @@ public extension NSLayoutConstraint {
     @IBInspectable var swiftyFitType: Int {
         get { return SwiftyFitType.none.rawValue }
         set {
-            guard let type = SwiftyFitType.init(rawValue: newValue) else { return }
+            guard let type = SwiftyFitType(rawValue: newValue) else { return }
             constant =  SwiftyFitsize.shared.fitNumberSize(constant, fitType: type)
         }
     }
@@ -174,7 +178,7 @@ public extension UILabel {
     @IBInspectable var fontFitType: Int {
         get { return SwiftyFitType.none.rawValue }
         set {
-            guard let type = SwiftyFitType.init(rawValue: newValue) else { return }
+            guard let type = SwiftyFitType(rawValue: newValue) else { return }
             guard let xfont = font else { return }
             self.font =  SwiftyFitsize.shared.fitFontSize(xfont, type: type)
         }
@@ -184,7 +188,7 @@ public extension UITextView {
     @IBInspectable var fontFitType: Int {
         get { return SwiftyFitType.none.rawValue }
         set {
-            guard let type = SwiftyFitType.init(rawValue: newValue) else { return }
+            guard let type = SwiftyFitType(rawValue: newValue) else { return }
             guard let xfont = font else { return }
             self.font =  SwiftyFitsize.shared.fitFontSize(xfont, type: type)
         }
@@ -194,7 +198,7 @@ public extension UITextField {
     @IBInspectable var fontFitType: Int {
         get { return SwiftyFitType.none.rawValue }
         set {
-            guard let type = SwiftyFitType.init(rawValue: newValue) else { return }
+            guard let type = SwiftyFitType(rawValue: newValue) else { return }
             guard let xfont = font else { return }
             self.font =  SwiftyFitsize.shared.fitFontSize(xfont, type: type)
         }
@@ -204,7 +208,7 @@ public extension UIButton {
     @IBInspectable var fontFitType: Int {
         get { return SwiftyFitType.none.rawValue }
         set {
-            guard let type = SwiftyFitType.init(rawValue: newValue) else { return }
+            guard let type = SwiftyFitType(rawValue: newValue) else { return }
             guard let xfont = titleLabel?.font else { return }
             self.titleLabel?.font =  SwiftyFitsize.shared.fitFontSize(xfont, type: type)
         }
@@ -212,3 +216,47 @@ public extension UIButton {
 }
 
 
+// MARK:- OC
+public extension UIFont {
+    @objc var sf: UIFont { return self~ }
+    @objc var sfz: UIFont { return self≈ }
+}
+public extension SwiftyFitsize {
+    @objc public func sf_int(_ value: Int) -> CGFloat {
+        return value~
+    }
+    @objc public func sf_float(_ value: CGFloat) -> CGFloat {
+        return value~
+    }
+    @objc public func sf_point(_ value: CGPoint) -> CGPoint {
+        return value~
+    }
+    @objc public func sf_size(_ value: CGSize) -> CGSize {
+        return value~
+    }
+    @objc public func sf_rect(_ value: CGRect) -> CGRect {
+        return value~
+    }
+    @objc public func sf_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
+        return value~
+    }
+    
+    @objc public func sfz_int(_ value: Int) -> CGFloat {
+        return value≈
+    }
+    @objc public func sfz_float(_ value: CGFloat) -> CGFloat {
+        return value≈
+    }
+    @objc public func sfz_point(_ value: CGPoint) -> CGPoint {
+        return value≈
+    }
+    @objc public func sfz_size(_ value: CGSize) -> CGSize {
+        return value≈
+    }
+    @objc public func sfz_rect(_ value: CGRect) -> CGRect {
+        return value≈
+    }
+    @objc public func sfz_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
+        return value≈
+    }
+}
