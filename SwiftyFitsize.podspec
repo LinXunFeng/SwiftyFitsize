@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftyFitsize'
-  s.version          = '0.4.0'
+  s.version          = '0.4.1'
   s.summary          = '📱 Swifty screen adaptation solution'
   s.homepage         = 'https://github.com/LinXunFeng/SwiftyFitsize'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -10,9 +10,7 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.ios.deployment_target = '9.0'
 
-  s.source_files = ['Sources/*.swift', 'Sources/SwiftyFitsize.h']
-  s.public_header_files = ['Sources/SwiftyFitsize.h']
-  
-  s.requires_arc = true
+  s.source_files = 'Sources/*.{h,swift}'
+  s.public_header_files = 'Sources/*.h'
   
 end

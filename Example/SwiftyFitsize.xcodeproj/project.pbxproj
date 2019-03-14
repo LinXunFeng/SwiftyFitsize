@@ -10,8 +10,6 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		A0AD802198E7D689CC082D7E /* Pods_SwiftyFitsize_OC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8BB3CE0FAC8A1DAC4783EB /* Pods_SwiftyFitsize_OC.framework */; };
 		A4D82BDF623A472BB29DA146 /* Pods_SwiftyFitsize_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CC1BC0FFA641AFB8146325 /* Pods_SwiftyFitsize_SwiftTests.framework */; };
-		AD29D4865A6CC04E6C095CE8 /* Pods_SwiftyFitsize_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C29A31108B343C0CF422BD2 /* Pods_SwiftyFitsize_Tests.framework */; };
-		DAECACDAC60C720D74F77715 /* Pods_SwiftyFitsize_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B03DD5D34EB0F783BFE6B8D /* Pods_SwiftyFitsize_Example.framework */; };
 		ED44E8DB7ED6F40893FB095E /* Pods_SwiftyFitsize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7872D65259D54A0A000033 /* Pods_SwiftyFitsize_Swift.framework */; };
 		FDD73CF6219D053F00CF24B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD73CF5219D053F00CF24B1 /* AppDelegate.m */; };
 		FDD73CF9219D053F00CF24B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD73CF8219D053F00CF24B1 /* ViewController.m */; };
@@ -69,8 +67,6 @@
 		8E8BB3CE0FAC8A1DAC4783EB /* Pods_SwiftyFitsize_OC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyFitsize_OC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9316AD6C19594A8107F2CA5B /* Pods-SwiftyFitsize_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_Tests/Pods-SwiftyFitsize_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		93F0FEADB4647825DB7C07A7 /* Pods-SwiftyFitsize-OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize-OC.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize-OC/Pods-SwiftyFitsize-OC.debug.xcconfig"; sourceTree = "<group>"; };
-		9B03DD5D34EB0F783BFE6B8D /* Pods_SwiftyFitsize_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyFitsize_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C29A31108B343C0CF422BD2 /* Pods_SwiftyFitsize_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyFitsize_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DADE066E51FFBC9C2BA2C1C /* Pods-SwiftyFitsize_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_Swift.release.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_Swift/Pods-SwiftyFitsize_Swift.release.xcconfig"; sourceTree = "<group>"; };
 		B7C390DC49FF3023FE5AD21B /* Pods-SwiftyFitsize_SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_SwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_SwiftTests/Pods-SwiftyFitsize_SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE7798381C8FED4CEF4E3272 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -110,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAECACDAC60C720D74F77715 /* Pods_SwiftyFitsize_Example.framework in Frameworks */,
 				ED44E8DB7ED6F40893FB095E /* Pods_SwiftyFitsize_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD29D4865A6CC04E6C095CE8 /* Pods_SwiftyFitsize_Tests.framework in Frameworks */,
 				A4D82BDF623A472BB29DA146 /* Pods_SwiftyFitsize_SwiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,8 +146,6 @@
 		34268B17AF34B66E4CC55FD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9B03DD5D34EB0F783BFE6B8D /* Pods_SwiftyFitsize_Example.framework */,
-				9C29A31108B343C0CF422BD2 /* Pods_SwiftyFitsize_Tests.framework */,
 				8E8BB3CE0FAC8A1DAC4783EB /* Pods_SwiftyFitsize_OC.framework */,
 				6A7872D65259D54A0A000033 /* Pods_SwiftyFitsize_Swift.framework */,
 				68CC1BC0FFA641AFB8146325 /* Pods_SwiftyFitsize_SwiftTests.framework */,
@@ -570,15 +562,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SwiftyFitsize_OC/Pods-SwiftyFitsize_OC-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwiftyFitsize-iOS12.0/SwiftyFitsize.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyFitsize.framework",
 			);
@@ -592,16 +580,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SwiftyFitsize_Swift/Pods-SwiftyFitsize_Swift-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwiftyFitsize-iOS9.3/SwiftyFitsize.framework",
 				"${BUILT_PRODUCTS_DIR}/LXFProtocolTool/LXFProtocolTool.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyFitsize.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LXFProtocolTool.framework",
