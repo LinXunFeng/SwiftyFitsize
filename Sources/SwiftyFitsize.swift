@@ -222,41 +222,41 @@ public extension UIFont {
     @objc var sfz: UIFont { return self≈ }
 }
 public extension SwiftyFitsize {
-    @objc public func sf_int(_ value: Int) -> CGFloat {
+    @objc func sf_int(_ value: Int) -> CGFloat {
         return value~
     }
-    @objc public func sf_float(_ value: CGFloat) -> CGFloat {
+    @objc func sf_float(_ value: CGFloat) -> CGFloat {
         return value~
     }
-    @objc public func sf_point(_ value: CGPoint) -> CGPoint {
+    @objc func sf_point(_ value: CGPoint) -> CGPoint {
         return value~
     }
-    @objc public func sf_size(_ value: CGSize) -> CGSize {
+    @objc func sf_size(_ value: CGSize) -> CGSize {
         return value~
     }
-    @objc public func sf_rect(_ value: CGRect) -> CGRect {
+    @objc func sf_rect(_ value: CGRect) -> CGRect {
         return value~
     }
-    @objc public func sf_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
+    @objc func sf_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
         return value~
     }
     
-    @objc public func sfz_int(_ value: Int) -> CGFloat {
+    @objc func sfz_int(_ value: Int) -> CGFloat {
         return value≈
     }
-    @objc public func sfz_float(_ value: CGFloat) -> CGFloat {
+    @objc func sfz_float(_ value: CGFloat) -> CGFloat {
         return value≈
     }
-    @objc public func sfz_point(_ value: CGPoint) -> CGPoint {
+    @objc func sfz_point(_ value: CGPoint) -> CGPoint {
         return value≈
     }
-    @objc public func sfz_size(_ value: CGSize) -> CGSize {
+    @objc func sfz_size(_ value: CGSize) -> CGSize {
         return value≈
     }
-    @objc public func sfz_rect(_ value: CGRect) -> CGRect {
+    @objc func sfz_rect(_ value: CGRect) -> CGRect {
         return value≈
     }
-    @objc public func sfz_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
+    @objc func sfz_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
         return value≈
     }
 }
