@@ -20,6 +20,7 @@
 - Cocoapods
 
 ```ruby
+use_frameworks!
 pod 'SwiftyFitsize'
 ```
 
@@ -126,6 +127,14 @@ enum SwiftyFitType: Int {
 > 1. 由于 `OC` 不支持运算符重载，所以只能用宏来适配。
 >
 > 2. `Xib` 和  `Storyboard`  则跟上方提及的使用方式相同。
+
+
+
+- 导入
+
+```objc
+@import SwiftyFitsize;
+```
 
 
 
