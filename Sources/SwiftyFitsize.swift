@@ -84,7 +84,7 @@ public postfix func ~ (value: CGFloat) -> CGFloat {
     return SwiftyFitsize.shared.fitNumberSize(value, fitType: .flexible)
 }
 public postfix func ~ (font: UIFont) -> UIFont {
-    return UIFont(name: font.fontName, size: font.pointSize~) ?? font
+    return font.withSize(font.pointSize~)
 }
 public postfix func ~ (value: Int) -> CGFloat {
     return CGFloat(value)~
