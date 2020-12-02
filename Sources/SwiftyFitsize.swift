@@ -12,12 +12,18 @@ import UIKit
     /// Original Value
     case none = 0
     /// ~
-    case flexible = 1
+    case flexibleWidth = 1
     /// ≈
-    case force = 2
+    case forceWidth = 2
+    /// ∣
+    case flexibleHeight = 3
+    /// ∥
+    case forceHeight = 4
+    /// ⩇
+    case flexibleSafeAreaHeight = 5
+    /// ⩉
+    case forceSafeAreaHeight = 6
 }
-
-fileprivate let ScreenW = UIScreen.main.bounds.width
 
 @objc public final class SwiftyFitsize: NSObject {
     static let shared = SwiftyFitsize()
@@ -29,6 +35,8 @@ fileprivate let ScreenW = UIScreen.main.bounds.width
     
     /// 默认参照宽度
     @objc public private(set) var referenceW: CGFloat = 375
+    /// 默认参照高度
+    @objc public private(set) var referenceH: CGFloat = 667
     /// 默认 iPad 适配缩放倍数 (0 , 1]
     @objc public private(set) var iPadFitMultiple: CGFloat = 0.5
     
@@ -52,11 +60,18 @@ fileprivate let ScreenW = UIScreen.main.bounds.width
     ) -> CGFloat {
         switch fitType {
         case .none: return value
-        case .flexible:
-            return ScreenW / referenceW * value *
-                (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
-                    ? SwiftyFitsize.shared.iPadFitMultiple : 1)
-        case .force: return ScreenW / referenceW * value
+        case .flexibleWidth:
+            return Config.Screen.width / referenceW * value *
+                (Config.Device.isIPad ? SwiftyFitsize.shared.iPadFitMultiple : 1)
+        case .forceWidth: return Config.Screen.width / referenceW * value
+        case .flexibleHeight:
+            return Config.Screen.height / referenceH * value *
+                (Config.Device.isIPad ? SwiftyFitsize.shared.iPadFitMultiple : 1)
+        case .forceHeight: return Config.Screen.height / referenceH * value
+        case .flexibleSafeAreaHeight:
+            return Config.Screen.iPhoneXSeriesSafeAreaHeight / referenceH * value *
+                (Config.Device.isIPad ? SwiftyFitsize.shared.iPadFitMultiple : 1)
+        case .forceSafeAreaHeight: return Config.Screen.iPhoneXSeriesSafeAreaHeight / referenceH * value
         }
     }
     
@@ -65,8 +80,12 @@ fileprivate let ScreenW = UIScreen.main.bounds.width
         type: SwiftyFitType
     ) -> UIFont {
         switch type {
-        case .flexible: return font~
-        case .force: return font≈
+        case .flexibleWidth: return font~
+        case .forceWidth: return font≈
+        case .flexibleHeight: return font∣
+        case .forceHeight: return font∥
+        case .flexibleSafeAreaHeight: return font⩇
+        case .forceSafeAreaHeight: return font⩉
         default: return font
         }
     }
@@ -74,14 +93,18 @@ fileprivate let ScreenW = UIScreen.main.bounds.width
 
 // MARK:- SwiftyFitsize
 /*
- * ~ : 当设备为iPad时，适配后的 value 会再乘上 iPadFitMultiple
- * ≈ : 强制适配，不论是iPhone还是iPad 都不会乘上 iPadFitMultiple
+ * ~ : 对比宽度，当设备为iPad时，适配后的 value 会再乘上 iPadFitMultiple
+ * ≈ : 对比宽度，强制适配，不论是iPhone还是iPad 都不会乘上 iPadFitMultiple
+ * ∣ : 对比高度，对应 ~ ，整屏高度
+ * ∥ : 对比高度，对应 ≈ ，整屏高度
+ * ⩇ : 对比高度，对应 ∣ ，安全区域内的高度
+ * ⩉ : 对比高度，对应 ∥ ，安全区域内的高度
  */
 
 // MARK: operator ~
 postfix operator ~
 public postfix func ~ (value: CGFloat) -> CGFloat {
-    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .flexible)
+    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .flexibleWidth)
 }
 public postfix func ~ (font: UIFont) -> UIFont {
     return font.withSize(font.pointSize~)
@@ -124,7 +147,7 @@ public postfix func ~ (value: UIEdgeInsets) -> UIEdgeInsets {
 // MARK: operator ≈
 postfix operator ≈
 public postfix func ≈ (value: CGFloat) -> CGFloat {
-    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .force)
+    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .forceWidth)
 }
 public postfix func ≈ (font: UIFont) -> UIFont {
     return UIFont(name: font.fontName, size: font.pointSize≈) ?? font
@@ -163,6 +186,179 @@ public postfix func ≈ (value: UIEdgeInsets) -> UIEdgeInsets {
         right: value.right≈
     )
 }
+
+// MARK: operator ∣
+postfix operator ∣
+public postfix func ∣ (value: CGFloat) -> CGFloat {
+    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .flexibleHeight)
+}
+public postfix func ∣ (font: UIFont) -> UIFont {
+    return font.withSize(font.pointSize∣)
+}
+public postfix func ∣ (value: Int) -> CGFloat {
+    return CGFloat(value)∣
+}
+public postfix func ∣ (value: Float) -> CGFloat {
+    return CGFloat(value)∣
+}
+public postfix func ∣ (value: CGPoint) -> CGPoint {
+    return CGPoint(
+        x: value.x∣,
+        y: value.y∣
+    )
+}
+public postfix func ∣ (value: CGSize) -> CGSize {
+    return CGSize(
+        width: value.width∣,
+        height: value.height∣
+    )
+}
+public postfix func ∣ (value: CGRect) -> CGRect {
+    return CGRect(
+        x: value.origin.x∣,
+        y: value.origin.y∣,
+        width: value.size.width∣,
+        height: value.size.height∣
+    )
+}
+public postfix func ∣ (value: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsets(
+        top: value.top∣,
+        left: value.left∣,
+        bottom: value.bottom∣,
+        right: value.right∣
+    )
+}
+
+// MARK: operator ∥
+postfix operator ∥
+public postfix func ∥ (value: CGFloat) -> CGFloat {
+    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .forceHeight)
+}
+public postfix func ∥ (font: UIFont) -> UIFont {
+    return font.withSize(font.pointSize∥)
+}
+public postfix func ∥ (value: Int) -> CGFloat {
+    return CGFloat(value)∥
+}
+public postfix func ∥ (value: Float) -> CGFloat {
+    return CGFloat(value)∥
+}
+public postfix func ∥ (value: CGPoint) -> CGPoint {
+    return CGPoint(
+        x: value.x∥,
+        y: value.y∥
+    )
+}
+public postfix func ∥ (value: CGSize) -> CGSize {
+    return CGSize(
+        width: value.width∥,
+        height: value.height∥
+    )
+}
+public postfix func ∥ (value: CGRect) -> CGRect {
+    return CGRect(
+        x: value.origin.x∥,
+        y: value.origin.y∥,
+        width: value.size.width∥,
+        height: value.size.height∥
+    )
+}
+public postfix func ∥ (value: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsets(
+        top: value.top∥,
+        left: value.left∥,
+        bottom: value.bottom∥,
+        right: value.right∥
+    )
+}
+
+// MARK: operator ⩇
+postfix operator ⩇
+public postfix func ⩇ (value: CGFloat) -> CGFloat {
+    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .flexibleSafeAreaHeight)
+}
+public postfix func ⩇ (font: UIFont) -> UIFont {
+    return font.withSize(font.pointSize⩇)
+}
+public postfix func ⩇ (value: Int) -> CGFloat {
+    return CGFloat(value)⩇
+}
+public postfix func ⩇ (value: Float) -> CGFloat {
+    return CGFloat(value)⩇
+}
+public postfix func ⩇ (value: CGPoint) -> CGPoint {
+    return CGPoint(
+        x: value.x⩇,
+        y: value.y⩇
+    )
+}
+public postfix func ⩇ (value: CGSize) -> CGSize {
+    return CGSize(
+        width: value.width⩇,
+        height: value.height⩇
+    )
+}
+public postfix func ⩇ (value: CGRect) -> CGRect {
+    return CGRect(
+        x: value.origin.x⩇,
+        y: value.origin.y⩇,
+        width: value.size.width⩇,
+        height: value.size.height⩇
+    )
+}
+public postfix func ⩇ (value: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsets(
+        top: value.top⩇,
+        left: value.left⩇,
+        bottom: value.bottom⩇,
+        right: value.right⩇
+    )
+}
+
+// MARK: operator ⩉
+postfix operator ⩉
+public postfix func ⩉ (value: CGFloat) -> CGFloat {
+    return SwiftyFitsize.shared.fitNumberSize(value, fitType: .forceSafeAreaHeight)
+}
+public postfix func ⩉ (font: UIFont) -> UIFont {
+    return font.withSize(font.pointSize⩉)
+}
+public postfix func ⩉ (value: Int) -> CGFloat {
+    return CGFloat(value)⩉
+}
+public postfix func ⩉ (value: Float) -> CGFloat {
+    return CGFloat(value)⩉
+}
+public postfix func ⩉ (value: CGPoint) -> CGPoint {
+    return CGPoint(
+        x: value.x⩉,
+        y: value.y⩉
+    )
+}
+public postfix func ⩉ (value: CGSize) -> CGSize {
+    return CGSize(
+        width: value.width⩉,
+        height: value.height⩉
+    )
+}
+public postfix func ⩉ (value: CGRect) -> CGRect {
+    return CGRect(
+        x: value.origin.x⩉,
+        y: value.origin.y⩉,
+        width: value.size.width⩉,
+        height: value.size.height⩉
+    )
+}
+public postfix func ⩉ (value: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsets(
+        top: value.top⩉,
+        left: value.left⩉,
+        bottom: value.bottom⩉,
+        right: value.right⩉
+    )
+}
+
 
 // MARK:- Xib/Storyboard
 public extension NSLayoutConstraint {
@@ -258,5 +454,20 @@ public extension SwiftyFitsize {
     }
     @objc func sfz_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
         return value≈
+    }
+}
+
+
+// MARK:- Config
+fileprivate struct Config {
+    struct Screen {
+        static let width: CGFloat = UIScreen.main.bounds.width
+        static let height: CGFloat = UIScreen.main.bounds.height
+        static let iPhoneXSeriesSafeAreaHeight: CGFloat = height - iPhoneXSeriesTopH - iPhoneXSeriesBottomH
+        static let iPhoneXSeriesTopH: CGFloat = 24
+        static let iPhoneXSeriesBottomH: CGFloat = 34
+    }
+    struct Device {
+        static let isIPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
     }
 }
