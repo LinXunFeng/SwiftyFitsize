@@ -38,15 +38,30 @@ pod 'SwiftyFitsize'
 
 ## Usage
 
-##### 一、操作符 `~` 与 `≈`
+##### 一、运算符
 
 > 无论是 `~` 还是 `≈` 对 `iPhone` 的适配效果是一样的。而对 `iPad` 而言，`iPad` 的宽度太大，使用 `≈` 还是会按宽度比例进行运算，就会显示特别臃肿，这时使用 `~` 在显示上就会比较合适。
 >
 > - `~` 在  `≈` 的基础上针对 `iPad` 的适配大小后再去乘上 `iPadFitMultiple` 。
->
-> - 一般情况下直接使用 `~` 即可。
+>- 一般情况下直接使用 `~` 即可。
+> - 其它运算符亦是如此，具体请看下方的说明表
 
 
+
+| 运算符 | 说明                                                         |
+| ------ | ------------------------------------------------------------ |
+| `~`    | 对比宽度，当设备为 `iPad` 时，适配后的 `value` 会再乘上 `iPadFitMultiple` |
+| `≈`    | 对比宽度，强制适配，不论是 `iPhone` 还是 `iPad` 都不会乘上 `iPadFitMultiple` |
+| `∣`    | 对比高度，对应 `~` ，整屏高度                                |
+| `∥`    | 对比高度，对应 `≈` ，整屏高度                                |
+| `∣=`   | 对比高度，对应 `∣` ，安全区域内的高度                        |
+| `∥=`   | 对比高度，对应 `∥` ，安全区域内的高度                        |
+| `∣-`   | 对比高度，对应 `∣` ，除去刘海区域的安全区域内的高度          |
+| `∥-`   | 对比高度，对应 `∥` ，除去刘海区域的安全区域内的高度          |
+
+
+
+举个例子
 
 `~` : 当设备为 `iPad` 时，适配后的值会与 `iPadFitMultiple` 相乘
 
@@ -72,15 +87,22 @@ UIEdgeInsetsMake(10, 10, 10, 10)≈
 
 
 
-修改 `参照宽度` 与 `iPadFitMultiple`  可以调用以下方法
+修改 `参照宽度` 、`参照高度`、`是否为iPhoneX系列的参照高度`与 `iPadFitMultiple`  可以调用如下方法
 
 ```swift
 /// 设置参照的相关参数
 ///
 /// - Parameters:
 ///   - width: 参照的宽度
+///   - height: 参照的高度
+///   - isIPhoneXSeriesHeight: 是否为iPhoneX系列的参照高度
 ///   - iPadFitMultiple: iPad 在适配后所得值的倍数 (0 , 1]
-SwiftyFitsize.reference(width: 414, iPadFitMultiple: 0.5)
+SwiftyFitsize.reference(
+  width: 414, 
+  height: 896, 
+  isIPhoneXSeriesHeight: true, 
+  iPadFitMultiple: 0.5
+)
 ```
 
 
@@ -92,9 +114,21 @@ enum SwiftyFitType: Int {
     /// Original Value
     case none = 0
     /// ~
-    case flexible = 1
+    case flexibleWidth = 1
     /// ≈
-    case force = 2
+    case forceWidth = 2
+    /// ∣
+    case flexibleHeight = 3
+    /// ∥
+    case forceHeight = 4
+    /// ∣=
+    case flexibleSafeAreaCenterHeight = 5
+    /// ∥=
+    case forceSafeAreaCenterHeight = 6
+    /// ∣-
+    case flexibleSafeAreaWithoutTopHeight = 7
+    /// ∥-
+    case forceSafeAreaWithoutTopHeight = 8
 }
 ```
 
@@ -122,11 +156,38 @@ enum SwiftyFitType: Int {
 
 
 
+各高度适配的对比
+
+>- 红色:  `∣` 和 `∥` ，以整个屏幕的高度进行适配
+>- 蓝色:  `∣=` 和 `∥=`  以中心安全区域的高度进行适配
+>- 绿色:  `∣-` 和 `∥-`  以包括底部的安全区域进行适配
+
+![高度适配对比](./Screenshots/fitsize-height.jpg)
+
+
+
 ##### 三、Objective-C
 
 > 1. 由于 `OC` 不支持运算符重载，所以只能用宏来适配。
 >
 > 2. `Xib` 和  `Storyboard`  则跟上方提及的使用方式相同。
+
+
+
+`Swift运算符` 与 `OC宏` 对应表
+
+| Swift运算符 | OC宏         |
+| ----------- | ------------ |
+| `~`         | `SF_xx`      |
+| `≈`         | `SFZ_xx`     |
+| `∣`         | `SF_FH_xx`   |
+| `∥`         | `SFZ_FH_xx`  |
+| `∣=`        | `SF_SCH_xx`  |
+| `∥=`        | `SFZ_SCH_xx` |
+| `∣-`        | `SF_SBH_xx`  |
+| `∥-`        | `SFZ_SBH_xx` |
+
+注: `xx` 支持如下类型 `Font` 、`Int`、`Float`、`Point`、`Size`、`Rect`、`EdgeInsets`
 
 
 
@@ -136,12 +197,13 @@ enum SwiftyFitType: Int {
 @import SwiftyFitsize;
 ```
 
-
-
-- 修改 `参照宽度` 与 `iPadFitMultiple`  
+- 修改 `参照宽度` 、`参照高度`、`是否为iPhoneX系列的参照高度`与 `iPadFitMultiple`  
 
 ```objc
-[SwiftyFitsize referenceWithWidth:414 iPadFitMultiple:0.6];
+[SwiftyFitsize referenceWithWidth:414
+                           height:896
+            isIPhoneXSeriesHeight:YES
+                  iPadFitMultiple:0.6];
 ```
 
 - `~`
@@ -173,6 +235,8 @@ CGRect rect = SFZ_Rect(CGRectMake(10, 10, 100, 100));
 UIEdgeInsets edge = SFZ_EdgeInsets(UIEdgeInsetsMake(0, 0, 100, 100));
 ```
 
+其它运算符亦是如此使用
+
 
 
 ## Misc
@@ -199,8 +263,8 @@ SwiftyFitsize is available under the MIT license. See the LICENSE file for more 
 ## Author
 
 - LinXunFeng
-- email: [xunfenghellolo@gmail.com](mailto:xunfenghellolo@gmail.com)
-- Blogs:  [LinXunFeng‘s Blog](http://linxunfeng.top/)  | [掘金](https://juejin.im/user/58f8065e61ff4b006646c72d/posts) | [简书](https://www.jianshu.com/u/31e85e7a22a2)
+- email: [linxunfeng@yeah.net](mailto:linxunfeng@yeah.net)
+- Blogs:  [LinXunFeng‘s Blog](http://linxunfeng.top/)  | [掘金](https://juejin.im/user/58f8065e61ff4b006646c72d/posts) 
 
 
 
