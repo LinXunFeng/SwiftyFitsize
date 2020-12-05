@@ -11,6 +11,8 @@
 		A0AD802198E7D689CC082D7E /* Pods_SwiftyFitsize_OC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8BB3CE0FAC8A1DAC4783EB /* Pods_SwiftyFitsize_OC.framework */; };
 		A4D82BDF623A472BB29DA146 /* Pods_SwiftyFitsize_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CC1BC0FFA641AFB8146325 /* Pods_SwiftyFitsize_SwiftTests.framework */; };
 		ED44E8DB7ED6F40893FB095E /* Pods_SwiftyFitsize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7872D65259D54A0A000033 /* Pods_SwiftyFitsize_Swift.framework */; };
+		FD58D9A825792722003270C8 /* LandscapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD58D9A725792722003270C8 /* LandscapeViewController.swift */; };
+		FD58D9FA257B4EB0003270C8 /* PortraitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD58D9F9257B4EB0003270C8 /* PortraitViewController.swift */; };
 		FDD73CF6219D053F00CF24B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD73CF5219D053F00CF24B1 /* AppDelegate.m */; };
 		FDD73CF9219D053F00CF24B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD73CF8219D053F00CF24B1 /* ViewController.m */; };
 		FDD73CFC219D053F00CF24B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD73CFA219D053F00CF24B1 /* Main.storyboard */; };
@@ -75,6 +77,8 @@
 		CC5417367931570201762227 /* Pods-SwiftyFitsize_OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_OC.release.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_OC/Pods-SwiftyFitsize_OC.release.xcconfig"; sourceTree = "<group>"; };
 		E6F933659A20197919B99384 /* SwiftyFitsize.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftyFitsize.podspec; path = ../SwiftyFitsize.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F65A6CC1E6DBF05F05856679 /* Pods-SwiftyFitsize_OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyFitsize_OC.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyFitsize_OC/Pods-SwiftyFitsize_OC.debug.xcconfig"; sourceTree = "<group>"; };
+		FD58D9A725792722003270C8 /* LandscapeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeViewController.swift; sourceTree = "<group>"; };
+		FD58D9F9257B4EB0003270C8 /* PortraitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitViewController.swift; sourceTree = "<group>"; };
 		FDD73CF2219D053F00CF24B1 /* SwiftyFitsize_OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyFitsize_OC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD73CF4219D053F00CF24B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDD73CF5219D053F00CF24B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 			isa = PBXGroup;
 			children = (
 				FDD73D3B219D077C00CF24B1 /* ViewController.swift */,
+				FD58D9F9257B4EB0003270C8 /* PortraitViewController.swift */,
+				FD58D9A725792722003270C8 /* LandscapeViewController.swift */,
 				FDD73D3C219D077C00CF24B1 /* FitsizeView.xib */,
 				FDD73D3D219D077C00CF24B1 /* FitsizeView.swift */,
 				FDD73D3E219D077C00CF24B1 /* LaunchScreen.xib */,
@@ -585,11 +591,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-SwiftyFitsize_Swift/Pods-SwiftyFitsize_Swift-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwiftyFitsize/SwiftyFitsize.framework",
 				"${BUILT_PRODUCTS_DIR}/LXFProtocolTool/LXFProtocolTool.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyFitsize.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LXFProtocolTool.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -605,7 +613,9 @@
 			files = (
 				FDD73D4B219D077C00CF24B1 /* AppDelegate.swift in Sources */,
 				FDD73D45219D077C00CF24B1 /* ViewController.swift in Sources */,
+				FD58D9A825792722003270C8 /* LandscapeViewController.swift in Sources */,
 				FDD73D47219D077C00CF24B1 /* FitsizeView.swift in Sources */,
+				FD58D9FA257B4EB0003270C8 /* PortraitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

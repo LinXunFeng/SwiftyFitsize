@@ -8,6 +8,7 @@ target 'SwiftyFitsize_Swift' do
   pod 'SwiftyFitsize', :path => '../'
   
   pod 'LXFProtocolTool/LXFNibloadable'
+  pod 'SnapKit'
 
   target 'SwiftyFitsize_SwiftTests' do
     inherit! :search_paths

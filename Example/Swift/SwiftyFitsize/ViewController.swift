@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyFitsize
 import LXFProtocolTool
+import SnapKit
 
 class ViewController: UIViewController {
     
@@ -28,8 +29,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let portraitBtn = UIButton()
+        portraitBtn.setTitle("竖屏后点我", for: .normal)
+        portraitBtn.backgroundColor = .brown
+        portraitBtn.addTarget(self, action: #selector(portraitBtnClick), for: .touchUpInside)
+        
+        let landscapeBtn = UIButton()
+        landscapeBtn.setTitle("横屏后点我", for: .normal)
+        landscapeBtn.backgroundColor = .brown
+        landscapeBtn.addTarget(self, action: #selector(landscapeBtnClick), for: .touchUpInside)
+        
         self.view.addSubview(fitLabel)
         self.view.addSubview(redView)
+        self.view.addSubview(portraitBtn)
+        self.view.addSubview(landscapeBtn)
         
         fitLabel.sizeToFit()
         let fitLabelX: CGFloat = 15
@@ -49,6 +62,27 @@ class ViewController: UIViewController {
         let fitsizeView = FitsizeView.loadFromNib()
         self.view.addSubview(fitsizeView)
         fitsizeView.frame = CGRect(x: 0, y: redViewFrame~.maxY, width: 328~, height: 298~)
+        
+        portraitBtn.snp.makeConstraints { make in
+            make.left.equalTo(redView.snp.right).offset(5)
+            make.height.equalTo(50)
+            make.width.equalTo(120)
+            make.top.equalTo(redView)
+        }
+        landscapeBtn.snp.makeConstraints { make in
+            make.left.width.height.equalTo(portraitBtn)
+            make.top.equalTo(portraitBtn.snp.bottom).offset(10)
+        }
+    }
+    
+    @objc func portraitBtnClick() {
+        let vc = PortraitViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func landscapeBtnClick() {
+        let vc = LandscapeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
