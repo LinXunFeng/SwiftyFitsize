@@ -272,7 +272,7 @@ SwiftyFitsize is available under the MIT license. See the LICENSE file for more 
 
 ## Other
 
-| <img src="https://github.com/LinXunFeng/site/raw/master/source/images/others/wx/wxQR_tip.png" style="width:200px;height:200px;"></img> | <img src="https://github.com/LinXunFeng/site/raw/master/source/images/others/pay/alipay_tip.png" style="width:200px;height:200px;"></img> | <img src="https://github.com/LinXunFeng/site/raw/master/source/images/others/pay/wechat_tip.png" style="width:200px;height:200px;"></img> |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-|                                                              |                                                              |                                                              |
+| <img width="252" height="294" src="https://github.com/LinXunFeng/site/raw/master/source/images/others/pay/alipay_tip.png" /> | <img width="252" height="294"  src="https://github.com/LinXunFeng/site/raw/master/source/images/others/pay/wechat_tip.png" /> |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                                                              |                                                              |
 
