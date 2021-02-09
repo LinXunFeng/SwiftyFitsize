@@ -4,7 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/SwiftyFitsize.svg?style=flat)](https://cocoapods.org/pods/SwiftyFitsize)
 [![License](https://img.shields.io/cocoapods/l/SwiftyFitsize.svg?style=flat)](https://cocoapods.org/pods/SwiftyFitsize)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyFitsize.svg?style=flat)](https://cocoapods.org/pods/SwiftyFitsize)
-![visitors](https://visitor-badge.glitch.me/badge?page_id=LinXunFeng.SwiftyFitsize.readme)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=LinXunFeng.SwiftyFitsize)
 
 ## Example
 
