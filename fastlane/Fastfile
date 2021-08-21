@@ -43,6 +43,6 @@ lane :release do |options|
 
   pod_lib_lint(allow_warnings: true)
 
-  pod_push
+  pod_push(allow_warnings: true)
 
 end
