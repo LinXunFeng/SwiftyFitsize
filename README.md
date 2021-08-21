@@ -265,7 +265,7 @@ struct Metric {
 
 struct Fit {
 //    @WrappedSwiftyFitsize(fitType: .flexibleWidth, reduceValue: Metric.tableViewLeftRightMargin)
-//		fitType 默认值是 .flexibleWidth，所以可以不传
+//    fitType 默认值是 .flexibleWidth，所以可以不传
     @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin)
     static var width: CGFloat = 375
 }
@@ -293,7 +293,7 @@ print("适配后的值 aVal -- \(aVal)")
 let bVal = SwiftyFitsize.fit(
   size: 40,
   fitType: .flexibleWidth,
-	reduceValue: Metric.tableViewLeftRightMargin * 2
+  reduceValue: Metric.tableViewLeftRightMargin * 2
 )
 print("适配后的值 bVal -- \(bVal)")
 ```
@@ -306,8 +306,8 @@ print("适配后的值 bVal -- \(bVal)")
 
 ```objc
 CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
-                                        fitType:SwiftyFitTypeFlexibleWidth
-                                    reduceValue:20];
+                    									fitType:SwiftyFitTypeFlexibleWidth
+                    							reduceValue:20];
 ```
 
 可以将其做为宏，以方便使用
@@ -326,7 +326,7 @@ NSLog(@"fitWidth -- %f", fitWidth);
 
 
 
-效果如包含红绿蓝条视图所示：
+效果如包含红绿蓝的条视图所示：
 
 ![高度适配对比](./Screenshots/fitsize-reduce.jpg)
 
