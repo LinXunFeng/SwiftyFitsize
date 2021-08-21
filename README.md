@@ -38,7 +38,7 @@ pod 'SwiftyFitsize'
 
 ## Usage
 
-##### 一、运算符
+###一、运算符
 
 > 无论是 `~` 还是 `≈` 对 `iPhone` 的适配效果是一样的。而对 `iPad` 而言，`iPad` 的宽度太大，使用 `≈` 还是会按宽度比例进行运算，就会显示特别臃肿，这时使用 `~` 在显示上就会比较合适。
 >
@@ -107,7 +107,7 @@ SwiftyFitsize.reference(
 
 
 
-##### 二、支持 xib 和 storyboard
+### 二、支持 xib 和 storyboard
 
 ```swift
 enum SwiftyFitType: Int {
@@ -166,7 +166,7 @@ enum SwiftyFitType: Int {
 
 
 
-##### 三、Objective-C
+### 三、Objective-C
 
 > 1. 由于 `OC` 不支持运算符重载，所以只能用宏来适配。
 >
@@ -236,6 +236,97 @@ UIEdgeInsets edge = SFZ_EdgeInsets(UIEdgeInsetsMake(0, 0, 100, 100));
 ```
 
 其它运算符亦是如此使用
+
+
+
+### 四、移除指定尺寸后适配
+
+> 场景：`tableView` 的左右间距在屏幕大小不同的情况下都为 `10`，在排除左右为 `10` 的间距后，再对`Cell` 进行等比适配
+>
+> 使用思路：宽度一共减去 `20` ，以剩下的大小来做适配
+
+#### Swift
+
+建议使用 `PropertyWrapper` 方案，供下面的调用方式一和二使用
+
+```swift
+
+struct Metric {
+    static let tableViewLeftRightMargin: CGFloat = 10 // 定义 tableView 的左右间距
+    ...
+    static let tableViewHeight: CGFloat = Fit.$width(30) // 去掉左右边距后进行适配的值
+    static let rowLeftViewWidth: CGFloat = Fit.$width(177.5)
+    static let rowCenterViewWidth: CGFloat = Fit.$width(100.5)
+    static let rowRightViewWidth: CGFloat = Fit.$width(77)
+    ...
+}
+
+struct Fit {
+//    @WrappedSwiftyFitsize(fitType: .flexibleWidth, reduceValue: Metric.tableViewLeftRightMargin)
+//		fitType 默认值是 .flexibleWidth，所以可以不传
+    @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin)
+    static var width: CGFloat = 375
+}
+```
+
+`375` 是初始化值，没有特殊意义，只为调用 `Fit.width` 时可以取到值，如果用不到 `Fit.width` 的值可以不进行初始化
+
+调用方式：
+
+```swift
+// 移除指定尺寸后的适配，调用方式：
+// 以下都是以适配 tableView 为例，移除 tableView 左右两侧固定的边距，以剩余的宽度来做适配
+
+// 方式一：先赋值再取值
+// 将 20 进行适配
+Fit.width = 20
+print("适配后的值 -- \(Fit.width)")
+
+// 方式二：使用 $ 将 width 当方法用，传入待适配的值
+// 将 30 进行适配
+let aVal = Fit.$width(30)
+print("适配后的值 aVal -- \(aVal)")
+
+// 方式三：调用 SwiftyFitsize.fit 方法
+let bVal = SwiftyFitsize.fit(
+  size: 40,
+  fitType: .flexibleWidth,
+	reduceValue: Metric.tableViewLeftRightMargin * 2
+)
+print("适配后的值 bVal -- \(bVal)")
+```
+
+
+
+#### Objective-C
+
+这是还是以适配 `tableView` 为例，移除 tableView 左右两侧固定的边距，以剩余的宽度来做适配
+
+```objc
+CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
+                                        fitType:SwiftyFitTypeFlexibleWidth
+                                    reduceValue:20];
+```
+
+可以将其做为宏，以方便使用
+
+```objc
+#define kFitWidth(value) \
+[SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20]
+```
+
+使用宏来做适配
+
+```objc
+CGFloat fitWidth = kFitWidth(40);
+NSLog(@"fitWidth -- %f", fitWidth);
+```
+
+
+
+效果如包含红绿蓝条视图所示：
+
+![高度适配对比](./Screenshots/fitsize-reduce.jpg)
 
 
 
