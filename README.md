@@ -266,7 +266,7 @@ struct Metric {
 struct Fit {
 //    @WrappedSwiftyFitsize(fitType: .flexibleWidth, reduceValue: Metric.tableViewLeftRightMargin)
 //    fitType 默认值是 .flexibleWidth，所以可以不传
-    @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin)
+    @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2)
     static var width: CGFloat = 375
 }
 ```
