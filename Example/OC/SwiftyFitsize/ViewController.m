@@ -137,9 +137,9 @@
      
      使用思路：一共减去20，用剩下的大小做适配
      */
-//    CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
-//                                            fitType:SwiftyFitTypeFlexibleWidth
-//                                        reduceValue:20];
+//CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
+//                                      fitType:SwiftyFitTypeFlexibleWidth
+//                                  reduceValue:20];
     CGFloat fitWidth = kFitWidth(40);
     NSLog(@"fitWidth -- %f", fitWidth);
 }
