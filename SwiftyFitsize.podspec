@@ -1,3 +1,5 @@
+#
+
 Pod::Spec.new do |s|
   s.name             = 'SwiftyFitsize'
   s.version          = '1.2.0'
