@@ -306,8 +306,8 @@ print("适配后的值 bVal -- \(bVal)")
 
 ```objc
 CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
-                    									fitType:SwiftyFitTypeFlexibleWidth
-                    							reduceValue:20];
+                                      fitType:SwiftyFitTypeFlexibleWidth
+                                  reduceValue:20];
 ```
 
 可以将其做为宏，以方便使用
