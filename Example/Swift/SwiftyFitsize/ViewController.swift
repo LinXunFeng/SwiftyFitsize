@@ -24,7 +24,7 @@ struct Metric {
 
 struct Fit {
 //    @WrappedSwiftyFitsize(fitType: .flexibleWidth, reduceValue: Metric.tableViewLeftRightMargin)
-    @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin) // fitType 默认值是 .flexibleWidth
+    @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2) // fitType 默认值是 .flexibleWidth
     static var width: CGFloat = 375
     // 375是初始化值，没有特殊意义，只为调用 Fit.width 时可以取到值，如果用不到 Fit.width 的值可以不进行初始化
 }
