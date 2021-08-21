@@ -104,28 +104,68 @@ import UIKit
             (iPadFitMultiple > 1 || iPadFitMultiple < 0) ? 1 : iPadFitMultiple
     }
     
+    /// 适配方法
+    /// - Parameters:
+    ///   - size: 大小
+    ///   - fitType: 适配方式
+    ///   - reduceValue: 要额外减少的数值
+    /// - Returns: 适配后的数值
+    @objc public static func fit(
+        size: CGFloat,
+        fitType: SwiftyFitType,
+        reduceValue: CGFloat = 0
+    ) -> CGFloat {
+        return Self.shared.fitNumberSize(
+            size,
+            fitType: fitType,
+            reduceValue: reduceValue
+        )
+    }
+    
+    /// 适配的核心计算方法
+    /// - Parameters:
+    ///   - value: 需要适配的数值
+    ///   - fitType: 适配方式
+    /// - Returns: 适配后的数值
     fileprivate func fitNumberSize(
         _ value: CGFloat,
-        fitType: SwiftyFitType
+        fitType: SwiftyFitType,
+        reduceValue: CGFloat = 0
     ) -> CGFloat {
         switch fitType {
         case .none: return value
         case .flexibleWidth:
-            return Config.Screen.width / referenceW * value * fitMultiple
+            let currentWidth = Config.Screen.width - reduceValue
+            let finalReferenceW = referenceW - reduceValue
+            return currentWidth / finalReferenceW * value * fitMultiple
         case .forceWidth:
-            return Config.Screen.width / referenceW * value
+            let currentWidth = Config.Screen.width - reduceValue
+            let finalReferenceW = referenceW - reduceValue
+            return currentWidth / finalReferenceW * value
         case .flexibleHeight:
-            return Config.Screen.height / referenceH * value * fitMultiple
+            let currentHeight = Config.Screen.height - reduceValue
+            let finalReferenceH = referenceH - reduceValue
+            return currentHeight / finalReferenceH * value * fitMultiple
         case .forceHeight:
-            return Config.Screen.height / referenceH * value
+            let currentHeight = Config.Screen.height - reduceValue
+            let finalReferenceH = referenceH - reduceValue
+            return currentHeight / finalReferenceH * value
         case .flexibleSafeAreaCenterHeight:
-            return Config.Screen.iPhoneXSeriesSafeAreaCenterHeight / referenceSafeAreaCenterHeight * value * fitMultiple
+            let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaCenterHeight - reduceValue
+            let finalReferenceH = referenceSafeAreaCenterHeight - reduceValue
+            return currentHeight / finalReferenceH * value * fitMultiple
         case .forceSafeAreaCenterHeight:
-            return Config.Screen.iPhoneXSeriesSafeAreaCenterHeight / referenceSafeAreaCenterHeight * value
+            let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaCenterHeight - reduceValue
+            let finalReferenceH = referenceSafeAreaCenterHeight - reduceValue
+            return currentHeight / finalReferenceH * value
         case .flexibleSafeAreaWithoutTopHeight:
-            return Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight / referenceSafeAreaWithoutTopHeight * value * fitMultiple
+            let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight - reduceValue
+            let finalReferenceH = referenceSafeAreaWithoutTopHeight - reduceValue
+            return currentHeight / finalReferenceH * value * fitMultiple
         case .forceSafeAreaWithoutTopHeight:
-            return Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight / referenceSafeAreaWithoutTopHeight * value
+            let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight - reduceValue
+            let finalReferenceH = referenceSafeAreaWithoutTopHeight - reduceValue
+            return currentHeight / finalReferenceH * value
         }
     }
     
@@ -624,94 +664,5 @@ public extension SwiftyFitsize {
     }
     @objc func sfz_sbh_EdgeInsets(_ value: UIEdgeInsets) -> UIEdgeInsets {
         return value∥-
-    }
-}
-
-
-// MARK:- Config
-fileprivate struct Config {
-    struct Screen {
-        private static let sw: CGFloat = UIScreen.main.bounds.width
-        private static let sh: CGFloat = UIScreen.main.bounds.height
-        
-        static let width: CGFloat = sw < sh ? sw : sh
-        static let height: CGFloat = sw < sh ? sh : sw
-        
-        static var safeAreaTopMargin: CGFloat {
-            return Device.getSafeAreaTopMargin()
-        }
-        static var safeAreaBottomMargin: CGFloat {
-            Device.getSafeAreaBottomMargin()
-        }
-        static var iPhoneXSeriesSafeAreaCenterHeight: CGFloat {
-            return height - safeAreaTopMargin - safeAreaBottomMargin
-        }
-        static var iPhoneXSeriesSafeAreaWithoutTopHeight: CGFloat {
-            return height - safeAreaTopMargin
-        }
-    }
-    struct Device {
-        static let isIPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
-        static let isIphneXSeries = isIPhoneXSeries()
-        
-        static func getCurrentWindow() -> UIWindow? {
-            if let window = UIApplication.shared.delegate?.window {
-                return window
-            }
-            if #available(iOS 13.0, *) {
-                if let windowScene = UIApplication.shared.connectedScenes.first {
-                    if let mainWindow = windowScene.value(forKey: "delegate.window") as? UIWindow {
-                        return mainWindow
-                    }
-                    return UIApplication.shared.windows.last
-                }
-            }
-            return UIApplication.shared.keyWindow
-        }
-        
-        /// 是否是iphoneX系列
-        static private func isIPhoneXSeries() -> Bool {
-            var bottomSafeInset: CGFloat = 0
-            if #available(iOS 11.0, *) {
-                bottomSafeInset = getCurrentWindow()?.safeAreaInsets.bottom ?? 0
-            }
-            return bottomSafeInset > 0
-        }
-        
-        /// 当前是否是竖屏
-        static func isPortrait() -> Bool {
-            return UIApplication.shared.statusBarOrientation.isPortrait
-        }
-        
-        static func getSafeAreaInsets() -> UIEdgeInsets {
-            var safeAreaInsets: UIEdgeInsets = .zero
-            if #available(iOS 11.0, *) {
-                guard let inset = getCurrentWindow()?.safeAreaInsets else { return .zero }
-                safeAreaInsets = inset
-            }
-            return safeAreaInsets
-        }
-        
-        /// 安全区域刘海一侧的间距
-        static func getSafeAreaTopMargin() -> CGFloat {
-            let inset = getSafeAreaInsets()
-            switch UIApplication.shared.statusBarOrientation {
-            case .portrait, .portraitUpsideDown: return inset.top
-            case .landscapeLeft: return inset.right
-            case .landscapeRight: return inset.left
-            default: return 0
-            }
-        }
-            
-        /// 安全区域刘海对侧的间距
-        static func getSafeAreaBottomMargin() -> CGFloat {
-            let inset = getSafeAreaInsets()
-            switch UIApplication.shared.statusBarOrientation {
-            case .portrait, .portraitUpsideDown: return inset.bottom
-            case .landscapeLeft: return inset.left
-            case .landscapeRight: return inset.right
-            default: return 0
-            }
-        }
     }
 }

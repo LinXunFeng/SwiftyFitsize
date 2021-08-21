@@ -9,6 +9,9 @@
 #import "ViewController.h"
 @import SwiftyFitsize;
 
+#define kFitWidth(value) \
+[SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20]
+
 @interface ViewController ()
 
 @end
@@ -125,6 +128,20 @@
     UIEdgeInsets edge7 = SF_SBH_EdgeInsets(edge);
     UIEdgeInsets edge8 = SFZ_SBH_EdgeInsets(edge);
     
+    
+    
+#pragma mark 移除额外尺寸
+    
+    /**
+     使用情景：列表的左右间距，在不同设备下都为10，其它大小进行等比缩放
+     
+     使用思路：一共减去20，用剩下的大小做适配
+     */
+//    CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
+//                                            fitType:SwiftyFitTypeFlexibleWidth
+//                                        reduceValue:20];
+    CGFloat fitWidth = kFitWidth(40);
+    NSLog(@"fitWidth -- %f", fitWidth);
 }
 
 @end
