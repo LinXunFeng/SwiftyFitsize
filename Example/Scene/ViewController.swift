@@ -1,38 +1,27 @@
 //
-//  PortraitViewController.swift
-//  SwiftyFitsize_Swift
+//  ViewController.swift
+//  SwiftyFitsize_Scene
 //
-//  Created by LinXunFeng on 2020/12/5.
-//  Copyright © 2020 LinXunFeng. All rights reserved.
+//  Created by LinXunFeng on 2021/8/25.
+//  Copyright © 2021 CocoaPods. All rights reserved.
 //
 
 import UIKit
-import SnapKit
 import SwiftyFitsize
+import SnapKit
 
-class PortraitViewController: UIViewController {
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
+class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.white
+        
+        print("view.frame.width~:\(view.frame.width) => \(view.frame.width~)")
+        print("view.frame.height∣-:\(view.frame.height) => \((view.frame.height)∣-)")
+        print(self.view.frame~)
+        
         self.view.backgroundColor = .white
-        let popBtn = UIButton()
-        popBtn.setTitle("POP", for: .normal)
-        popBtn.backgroundColor = .black
-        popBtn.addTarget(self, action: #selector(popBtnClick), for: .touchUpInside)
-        self.view.addSubview(popBtn)
-        popBtn.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.width.equalTo(80)
-            make.height.equalTo(50)
-        }
         
         // 设计稿上的大小
         let refHeight: CGFloat = 667
@@ -57,8 +46,6 @@ class PortraitViewController: UIViewController {
         self.view.addSubview(view6)
         
         let topMargin: CGFloat = SwiftyFitsize.Config.Device.getSafeAreaTopMargin()
-        let bottomMargin: CGFloat = SwiftyFitsize.Config.Device.getSafeAreaBottomMargin()
-        print("bottomMargin -- \(bottomMargin)")
         
         //  ∣ 和 ∥ 的区别，就是 ~ 和 ≈ 的区别一样
         //  ∣ 在ipad上会乘上一个系数，使在ipad上尺寸不会显得太大，请自行判断是否需要
@@ -103,8 +90,5 @@ class PortraitViewController: UIViewController {
             make.left.equalTo(view5).offset(-2)
         }
     }
-    
-    @objc func popBtnClick() {
-        self.navigationController?.popViewController(animated: true)
-    }
 }
+
