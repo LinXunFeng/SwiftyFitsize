@@ -42,11 +42,8 @@ extension SwiftyFitsize {
                     return window
                 }
                 if #available(iOS 13.0, *) {
-                    if let windowScene = UIApplication.shared.connectedScenes.first {
-                        if let mainWindow = windowScene.value(forKey: "delegate.window") as? UIWindow {
-                            return mainWindow
-                        }
-                        return UIApplication.shared.windows.last
+                    if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first {
+                        return window
                     }
                 }
                 return UIApplication.shared.keyWindow
