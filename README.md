@@ -332,6 +332,63 @@ NSLog(@"fitWidth -- %f", fitWidth);
 
 
 
+### 五、计算结果类型
+
+定义
+
+```swift
+/// 计算结果类型
+@objc public enum SwiftyFitCalcResultType: Int {
+    /// 跟随全局配置
+    case globalConfig
+    /// 原始数据
+    case raw
+    /// 四舍五入
+    case round
+    /// 保留一位小数（根据第二位小数进行四舍五入）
+    case oneDecimalPlace
+}
+```
+
+影响范围
+
+- `.raw ` : 影响忽略不计
+- `.round` : 影响范围 `(-0.5, 0]` 或 `[0, 0.5]`
+- `.oneDecimalPlace` : 影响范围 `(0.05, 0]` 或 `[0, 0.05]`
+
+全局配置
+
+> - 不配置则默认为 `.raw`
+> - `.globalConfig` 取的就是这里配置的类型
+> - 如果在该处还是设置为 `.globalConfig`，则内部会将其重置为 `.raw`
+
+```swift
+SwiftyFitsize.reference(width: 375, calcResultType: .oneDecimalPlace) // 全局配置计算结果为保留一位小数
+```
+
+示例数据：
+
+- 第一列为适配前的数值
+
+- 其它列为适配后根据不同的 `SwiftyFitCalcResultType` 计算得到的值
+
+| 原值 | raw                | round | oneDecimalPlace |
+| ---- | ------------------ | ----- | --------------- |
+| 35   | 36.478873239436616 | 36.0  | 36.5            |
+| 36   | 37.52112676056338  | 38.0  | 37.5            |
+
+```swift
+// 代码（iPhone12）
+SwiftyFitsize.fit(
+    size: 35, // 36
+    fitType: .flexibleWidth,
+    reduceValue: 10 * 2,
+    calcResultType: .raw // .round .oneDecimalPlace
+)
+```
+
+
+
 ## Misc
 
 下面列出一些设备对应的分辨率，方便查找
