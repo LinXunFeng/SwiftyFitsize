@@ -334,7 +334,7 @@ NSLog(@"fitWidth -- %f", fitWidth);
 
 ### 五、计算结果类型
 
-定义
+#### 定义
 
 ```swift
 /// 计算结果类型
@@ -350,13 +350,13 @@ NSLog(@"fitWidth -- %f", fitWidth);
 }
 ```
 
-影响范围
+#### 影响范围
 
 - `.raw ` : 影响忽略不计
 - `.round` : 影响范围 `(-0.5, 0]` 或 `[0, 0.5]`
-- `.oneDecimalPlace` : 影响范围 `(0.05, 0]` 或 `[0, 0.05]`
+- `.oneDecimalPlace` : 影响范围 `(-0.05, 0]` 或 `[0, 0.05]`
 
-全局配置
+#### 全局配置
 
 > - 不配置则默认为 `.raw`
 > - `.globalConfig` 取的就是这里配置的类型
@@ -365,6 +365,10 @@ NSLog(@"fitWidth -- %f", fitWidth);
 ```swift
 SwiftyFitsize.reference(width: 375, calcResultType: .oneDecimalPlace) // 全局配置计算结果为保留一位小数
 ```
+
+#### 使用
+
+>  以下在不指定 `calcResultType` 参数的情况下，默认都是跟随全局配置
 
 单独指定 `calcResultType`
 
@@ -386,7 +390,7 @@ SwiftyFitsize.fit(
 static var width: CGFloat = 375
 ```
 
-示例数据：
+#### 示例数据
 
 - 第一列为适配前的数值
 
