@@ -24,6 +24,7 @@ struct Metric {
 
 struct Fit {
 //    @WrappedSwiftyFitsize(fitType: .flexibleWidth, reduceValue: Metric.tableViewLeftRightMargin)
+//    @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2, calcResultType: .round) // calcResultType: .round 计算结果四舍五入，不传则按全局配置的来
     @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2) // fitType 默认值是 .flexibleWidth
     static var width: CGFloat = 375
     // 375是初始化值，没有特殊意义，只为调用 Fit.width 时可以取到值，如果用不到 Fit.width 的值可以不进行初始化
@@ -167,6 +168,35 @@ extension ViewController {
             reduceValue: Metric.tableViewLeftRightMargin * 2
         )
         print("适配后的值 bVal -- \(bVal)")
+        
+        print("============")
+        print("指定不同的calcResultType，适配后的值")
+        let calcVal: CGFloat = 36
+        // 其它
+        let cVal = SwiftyFitsize.fit(
+            size: calcVal,
+            fitType: .flexibleWidth,
+            reduceValue: Metric.tableViewLeftRightMargin * 2,
+            calcResultType: .raw
+        )
+        print("适配后的值 cVal -- \(cVal)")
+        
+        let dVal = SwiftyFitsize.fit(
+            size: calcVal,
+            fitType: .flexibleWidth,
+            reduceValue: Metric.tableViewLeftRightMargin * 2,
+            calcResultType: .round
+        )
+        print("适配后的值 dVal -- \(dVal)")
+        
+        let eVal = SwiftyFitsize.fit(
+            size: calcVal,
+            fitType: .flexibleWidth,
+            reduceValue: Metric.tableViewLeftRightMargin * 2,
+            calcResultType: .oneDecimalPlace
+        )
+        print("适配后的值 eVal -- \(eVal)")
+        print("============")
     }
 }
 

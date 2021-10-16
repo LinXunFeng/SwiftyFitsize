@@ -12,6 +12,15 @@
 #define kFitWidth(value) \
 [SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20]
 
+#define kFitWidthRaw(value) \
+[SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20 calcResultType:SwiftyFitCalcResultTypeRaw]
+
+#define kFitWidthRound(value) \
+[SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20 calcResultType:SwiftyFitCalcResultTypeRound]
+
+#define kFitWidthOneDecimalPlace(value) \
+[SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20 calcResultType:SwiftyFitCalcResultTypeOneDecimalPlace]
+
 @interface ViewController ()
 
 @end
@@ -20,10 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // CGFloat referenceW = [SwiftyFitsize sharedSwiftyFitsize].referenceW;
-    // [SwiftyFitsize referenceWithWidth:414 iPadFitMultiple:0.6]; // 该方法过期
-    [SwiftyFitsize referenceWithWidth:414 height:896 isIPhoneXSeriesHeight:YES iPadFitMultiple:0.6];
     
 #pragma mark UIFont
     UIFont *font = [UIFont systemFontOfSize:14];
@@ -137,11 +142,39 @@
      
      使用思路：一共减去20，用剩下的大小做适配
      */
-//CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
-//                                      fitType:SwiftyFitTypeFlexibleWidth
-//                                  reduceValue:20];
-    CGFloat fitWidth = kFitWidth(40);
+    CGFloat toFitVal = 40;
+    
+    // .globalConfig
+//    CGFloat fitWidth = [SwiftyFitsize fitWithSize:40
+//                                          fitType:SwiftyFitTypeFlexibleWidth
+//                                      reduceValue:20];
+    CGFloat fitWidth = kFitWidth(toFitVal);
     NSLog(@"fitWidth -- %f", fitWidth);
+    
+    // .raw
+//    CGFloat fitWidthRound = [SwiftyFitsize fitWithSize:40
+//                                               fitType:SwiftyFitTypeFlexibleWidth
+//                                           reduceValue:20
+//                                        calcResultType:SwiftyFitCalcResultTypeRound];
+    CGFloat fitWidthRaw = kFitWidthRaw(toFitVal);
+    NSLog(@"fitWidthRaw -- %f", fitWidthRaw);
+    
+    // .round
+//    CGFloat fitWidthRound = [SwiftyFitsize fitWithSize:40
+//                                               fitType:SwiftyFitTypeFlexibleWidth
+//                                           reduceValue:20
+//                                        calcResultType:SwiftyFitCalcResultTypeRound];
+    CGFloat fitWidthRound = kFitWidthRound(toFitVal);
+    NSLog(@"fitWidthRound -- %f", fitWidthRound);
+    
+    // .oneDecimalPlace
+//    CGFloat fitWidthOneDecimalPlace = [SwiftyFitsize fitWithSize:40
+//                                               fitType:SwiftyFitTypeFlexibleWidth
+//                                           reduceValue:20
+//                                        calcResultType:SwiftyFitCalcResultTypeOneDecimalPlace];
+    CGFloat fitWidthOneDecimalPlace = kFitWidthOneDecimalPlace(toFitVal);
+    NSLog(@"fitWidthOneDecimalPlace -- %f", fitWidthOneDecimalPlace);
+    
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+@import SwiftyFitsize;
 
 @interface AppDelegate ()
 
@@ -17,6 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // 全局配置
+    [SwiftyFitsize referenceWithWidth:414 // 参照的宽度
+                               height:896 // 参照的高度
+                isIPhoneXSeriesHeight:YES // 参照的设置是否为 x 系列
+                      iPadFitMultiple:0.6 // ipad系数
+                       calcResultType:SwiftyFitCalcResultTypeRound]; // 计算结果类型（这里指定：四舍五入）
+    
     return YES;
 }
 

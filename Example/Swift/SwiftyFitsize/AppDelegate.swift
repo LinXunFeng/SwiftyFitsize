@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
 //        SwiftyFitsize.reference(width: 414, iPadFitMultiple: 0.5)
+//        SwiftyFitsize.reference(width: 375, calcResultType: .round) // 全局配置计算结果为四舍五入
         
         return true
     }
