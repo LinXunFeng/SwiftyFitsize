@@ -373,7 +373,6 @@ SwiftyFitsize.reference(width: 375, calcResultType: .oneDecimalPlace) // 全局�
 单独指定 `calcResultType`
 
 ```swift
-// 代码（iPhone12）
 SwiftyFitsize.fit(
     size: 35, // 36
     fitType: .flexibleWidth,
@@ -385,7 +384,7 @@ SwiftyFitsize.fit(
 `PropertyWrapper` 方式
 
 ```swift
- // calcResultType: .raw .round .oneDecimalPlace
+// calcResultType: .raw .round .oneDecimalPlace
 @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2, calcResultType: .raw)
 static var width: CGFloat = 375
 ```
