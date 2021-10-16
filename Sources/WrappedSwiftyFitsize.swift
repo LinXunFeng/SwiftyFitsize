@@ -15,6 +15,8 @@ public struct WrappedSwiftyFitsize {
     private var reduceValue: CGFloat
     /// 适配类型
     private let fitType: SwiftyFitType
+    /// 计算结果类型
+    private let calcResultType: SwiftyFitCalcResultType
     
     public lazy var projectedValue: ((CGFloat) -> CGFloat) = {
        return calcValue
@@ -32,10 +34,12 @@ public struct WrappedSwiftyFitsize {
     public init(
         wrappedValue: CGFloat = 0,
         fitType: SwiftyFitType = .flexibleWidth,
-        reduceValue: CGFloat = 0
+        reduceValue: CGFloat = 0,
+        calcResultType: SwiftyFitCalcResultType = .globalConfig
     ) {
         self.reduceValue = reduceValue
         self.fitType = fitType
+        self.calcResultType = calcResultType
         self.value = self.calcValue(with: wrappedValue)
     }
     
@@ -43,7 +47,8 @@ public struct WrappedSwiftyFitsize {
         return SwiftyFitsize.fit(
             size: value,
             fitType: self.fitType,
-            reduceValue: self.reduceValue
+            reduceValue: self.reduceValue,
+            calcResultType: self.calcResultType
         )
     }
     

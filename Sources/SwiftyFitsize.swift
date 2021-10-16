@@ -9,38 +9,6 @@
 import UIKit
 
 // MARK:- SwiftyFitsize
-/*
- * ~  : 对比宽度，当设备为iPad时，适配后的 value 会再乘上 iPadFitMultiple
- * ≈  : 对比宽度，强制适配，不论是iPhone还是iPad 都不会乘上 iPadFitMultiple
- * ∣  : 对比高度，对应 ~ ，整屏高度
- * ∥  : 对比高度，对应 ≈ ，整屏高度
- * ∣= : 对比高度，对应 ∣ ，安全区域内的高度
- * ∥= : 对比高度，对应 ∥ ，安全区域内的高度
- * ∣- : 对比高度，对应 ∣ ，除去刘海区域的安全区域内的高度
- * ∥- : 对比高度，对应 ∥ ，除去刘海区域的安全区域内的高度
- */
-
-@objc public enum SwiftyFitType: Int {
-    /// Original Value
-    case none = 0
-    /// ~
-    case flexibleWidth = 1
-    /// ≈
-    case forceWidth = 2
-    /// ∣
-    case flexibleHeight = 3
-    /// ∥
-    case forceHeight = 4
-    /// ∣=
-    case flexibleSafeAreaCenterHeight = 5
-    /// ∥=
-    case forceSafeAreaCenterHeight = 6
-    /// ∣-
-    case flexibleSafeAreaWithoutTopHeight = 7
-    /// ∥-
-    case forceSafeAreaWithoutTopHeight = 8
-}
-
 @objc public final class SwiftyFitsize: NSObject {
     static let shared = SwiftyFitsize()
     private override init() { }
@@ -57,6 +25,9 @@ import UIKit
     @objc public private(set) var isIPhoneXSeriesHeight: Bool = false
     /// 默认 iPad 适配缩放倍数 (0 , 1]
     @objc public private(set) var iPadFitMultiple: CGFloat = 0.5
+    /// 计算结果类型（默认: 原始数据）
+    @objc public private(set) var calcResultType: SwiftyFitCalcResultType = .raw
+    
     /// 中间安全区域参照高度
     var referenceSafeAreaCenterHeight: CGFloat {
         if !isIPhoneXSeriesHeight { return referenceH }
@@ -91,17 +62,26 @@ import UIKit
     ///   - height: 参照的高度
     ///   - isIPhoneXSeriesHeight: 是否为iPhoneX系列的参照高度
     ///   - iPadFitMultiple: iPad 在适配后所得值的倍数 (0 , 1]
+    ///   - calcResultType: 计算结果类型（默认：原始数据），如果传入的是.globalConfig，则会修改为.raw
     @objc public static func reference(
         width: CGFloat,
         height: CGFloat = 667,
         isIPhoneXSeriesHeight: Bool = false,
-        iPadFitMultiple: CGFloat = 0.5
+        iPadFitMultiple: CGFloat = 0.5,
+        calcResultType: SwiftyFitCalcResultType = .raw
     ) {
         SwiftyFitsize.shared.referenceW = width
         SwiftyFitsize.shared.referenceH = height
         SwiftyFitsize.shared.isIPhoneXSeriesHeight = isIPhoneXSeriesHeight
         SwiftyFitsize.shared.iPadFitMultiple =
             (iPadFitMultiple > 1 || iPadFitMultiple < 0) ? 1 : iPadFitMultiple
+        
+        var finalCalcResultType: SwiftyFitCalcResultType = calcResultType
+        switch calcResultType {
+        case .globalConfig: finalCalcResultType = .raw
+        default: break
+        }
+        SwiftyFitsize.shared.calcResultType = finalCalcResultType
     }
     
     /// 适配方法
@@ -115,10 +95,32 @@ import UIKit
         fitType: SwiftyFitType,
         reduceValue: CGFloat = 0
     ) -> CGFloat {
+        return Self.fit(
+            size: size,
+            fitType: fitType,
+            reduceValue: reduceValue,
+            calcResultType: .globalConfig
+        )
+    }
+    
+    /// 适配方法
+    /// - Parameters:
+    ///   - size: 大小
+    ///   - fitType: 适配方式
+    ///   - reduceValue: 要额外减少的数值
+    ///   - calcResultType: 计算结果类型（默认: 跟随全局配置）
+    /// - Returns: 适配后的数值
+    @objc public static func fit(
+        size: CGFloat,
+        fitType: SwiftyFitType,
+        reduceValue: CGFloat = 0,
+        calcResultType: SwiftyFitCalcResultType = .globalConfig
+    ) -> CGFloat {
         return Self.shared.fitNumberSize(
             size,
             fitType: fitType,
-            reduceValue: reduceValue
+            reduceValue: reduceValue,
+            calcResultType: calcResultType
         )
     }
     
@@ -126,47 +128,70 @@ import UIKit
     /// - Parameters:
     ///   - value: 需要适配的数值
     ///   - fitType: 适配方式
+    ///   - reduceValue: 减少的数值（默认: 0）
+    ///   - calcResultType: 计算结果类型（默认: 跟随全局配置）
     /// - Returns: 适配后的数值
     fileprivate func fitNumberSize(
         _ value: CGFloat,
         fitType: SwiftyFitType,
-        reduceValue: CGFloat = 0
+        reduceValue: CGFloat = 0,
+        calcResultType: SwiftyFitCalcResultType = .globalConfig
     ) -> CGFloat {
+        var calcResult: CGFloat
+        
         switch fitType {
         case .none: return value
         case .flexibleWidth:
             let currentWidth = Config.Screen.width - reduceValue
             let finalReferenceW = referenceW - reduceValue
-            return currentWidth / finalReferenceW * value * fitMultiple
+            calcResult = currentWidth / finalReferenceW * value * fitMultiple
         case .forceWidth:
             let currentWidth = Config.Screen.width - reduceValue
             let finalReferenceW = referenceW - reduceValue
-            return currentWidth / finalReferenceW * value
+            calcResult = currentWidth / finalReferenceW * value
         case .flexibleHeight:
             let currentHeight = Config.Screen.height - reduceValue
             let finalReferenceH = referenceH - reduceValue
-            return currentHeight / finalReferenceH * value * fitMultiple
+            calcResult = currentHeight / finalReferenceH * value * fitMultiple
         case .forceHeight:
             let currentHeight = Config.Screen.height - reduceValue
             let finalReferenceH = referenceH - reduceValue
-            return currentHeight / finalReferenceH * value
+            calcResult = currentHeight / finalReferenceH * value
         case .flexibleSafeAreaCenterHeight:
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaCenterHeight - reduceValue
             let finalReferenceH = referenceSafeAreaCenterHeight - reduceValue
-            return currentHeight / finalReferenceH * value * fitMultiple
+            calcResult = currentHeight / finalReferenceH * value * fitMultiple
         case .forceSafeAreaCenterHeight:
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaCenterHeight - reduceValue
             let finalReferenceH = referenceSafeAreaCenterHeight - reduceValue
-            return currentHeight / finalReferenceH * value
+            calcResult = currentHeight / finalReferenceH * value
         case .flexibleSafeAreaWithoutTopHeight:
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight - reduceValue
             let finalReferenceH = referenceSafeAreaWithoutTopHeight - reduceValue
-            return currentHeight / finalReferenceH * value * fitMultiple
+            calcResult = currentHeight / finalReferenceH * value * fitMultiple
         case .forceSafeAreaWithoutTopHeight:
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight - reduceValue
             let finalReferenceH = referenceSafeAreaWithoutTopHeight - reduceValue
-            return currentHeight / finalReferenceH * value
+            calcResult = currentHeight / finalReferenceH * value
         }
+        
+        // 根据指定的计算结果类型计算最终的值
+        let finalCalcResultType: SwiftyFitCalcResultType
+        if calcResultType == .globalConfig {
+            finalCalcResultType = SwiftyFitsize.shared.calcResultType
+        } else {
+            finalCalcResultType = calcResultType
+        }
+        switch finalCalcResultType {
+        case .globalConfig, .raw: // 原始数据
+            break
+        case .round: // 四舍五入
+            calcResult = round(calcResult)
+        case .oneDecimalPlace: // 保留一位小数
+            calcResult = round(calcResult * 10) / 10
+        }
+        
+        return calcResult
     }
     
     fileprivate func fitFontSize(
