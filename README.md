@@ -366,16 +366,7 @@ NSLog(@"fitWidth -- %f", fitWidth);
 SwiftyFitsize.reference(width: 375, calcResultType: .oneDecimalPlace) // 全局配置计算结果为保留一位小数
 ```
 
-示例数据：
-
-- 第一列为适配前的数值
-
-- 其它列为适配后根据不同的 `SwiftyFitCalcResultType` 计算得到的值
-
-| 原值 | raw                | round | oneDecimalPlace |
-| ---- | ------------------ | ----- | --------------- |
-| 35   | 36.478873239436616 | 36.0  | 36.5            |
-| 36   | 37.52112676056338  | 38.0  | 37.5            |
+单独指定 `calcResultType`
 
 ```swift
 // 代码（iPhone12）
@@ -386,6 +377,25 @@ SwiftyFitsize.fit(
     calcResultType: .raw // .round .oneDecimalPlace
 )
 ```
+
+`PropertyWrapper` 方式
+
+```swift
+ // calcResultType: .raw .round .oneDecimalPlace
+@WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2, calcResultType: .raw)
+static var width: CGFloat = 375
+```
+
+示例数据：
+
+- 第一列为适配前的数值
+
+- 其它列为适配后根据不同的 `SwiftyFitCalcResultType` 计算得到的值
+
+| 原值 | raw                | round | oneDecimalPlace |
+| ---- | ------------------ | ----- | --------------- |
+| 35   | 36.478873239436616 | 36.0  | 36.5            |
+| 36   | 37.52112676056338  | 38.0  | 37.5            |
 
 
 
