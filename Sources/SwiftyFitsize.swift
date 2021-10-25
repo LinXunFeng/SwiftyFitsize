@@ -10,7 +10,7 @@ import UIKit
 
 // MARK:- SwiftyFitsize
 @objc public final class SwiftyFitsize: NSObject {
-    static let shared = SwiftyFitsize()
+    public static let shared = SwiftyFitsize()
     private override init() { }
     
     @objc public class func sharedSwiftyFitsize() -> SwiftyFitsize {
@@ -30,13 +30,11 @@ import UIKit
     
     /// 中间安全区域参照高度
     var referenceSafeAreaCenterHeight: CGFloat {
-        if !isIPhoneXSeriesHeight { return referenceH }
-        return referenceH - Config.Screen.safeAreaTopMargin - Config.Screen.safeAreaBottomMargin
+        return self.fetchReferenceSafeAreaCenterHeight()
     }
     /// 仅去除顶部后的安全区域参照高度
     var referenceSafeAreaWithoutTopHeight: CGFloat {
-        if !isIPhoneXSeriesHeight { return referenceH }
-        return referenceH - Config.Screen.safeAreaTopMargin
+        return self.fetchReferenceSafeAreaWithoutTopHeight()
     }
     /// 适配倍数
     var fitMultiple: CGFloat {
@@ -124,6 +122,33 @@ import UIKit
         )
     }
     
+    /// 适配方法
+    /// - Parameters:
+    ///   - size: 大小
+    ///   - fitType: 适配方式
+    ///   - reduceValue: 要额外减少的数值
+    ///   - calcResultType: 计算结果类型（默认: 跟随全局配置）
+    /// - Returns: 适配后的数值
+    @objc public static func fit(
+        size: CGFloat,
+        fitType: SwiftyFitType,
+        referenceWidth: CGFloat = SwiftyFitsize.shared.referenceW,
+        referenceHeight: CGFloat = SwiftyFitsize.shared.referenceH,
+        isIPhoneXSeriesHeight: Bool = SwiftyFitsize.shared.isIPhoneXSeriesHeight,
+        reduceValue: CGFloat = 0,
+        calcResultType: SwiftyFitCalcResultType = .globalConfig
+    ) -> CGFloat {
+        return Self.shared.fitNumberSize(
+            size,
+            fitType: fitType,
+            referenceWidth: referenceWidth,
+            referenceHeight: referenceHeight,
+            isIPhoneXSeriesHeight: isIPhoneXSeriesHeight,
+            reduceValue: reduceValue,
+            calcResultType: calcResultType
+        )
+    }
+    
     /// 适配的核心计算方法
     /// - Parameters:
     ///   - value: 需要适配的数值
@@ -134,6 +159,9 @@ import UIKit
     fileprivate func fitNumberSize(
         _ value: CGFloat,
         fitType: SwiftyFitType,
+        referenceWidth: CGFloat = SwiftyFitsize.shared.referenceW,
+        referenceHeight: CGFloat = SwiftyFitsize.shared.referenceH,
+        isIPhoneXSeriesHeight: Bool = SwiftyFitsize.shared.isIPhoneXSeriesHeight,
         reduceValue: CGFloat = 0,
         calcResultType: SwiftyFitCalcResultType = .globalConfig
     ) -> CGFloat {
@@ -143,33 +171,49 @@ import UIKit
         case .none: return value
         case .flexibleWidth:
             let currentWidth = Config.Screen.width - reduceValue
-            let finalReferenceW = referenceW - reduceValue
+            let finalReferenceW = referenceWidth - reduceValue
             calcResult = currentWidth / finalReferenceW * value * fitMultiple
         case .forceWidth:
             let currentWidth = Config.Screen.width - reduceValue
-            let finalReferenceW = referenceW - reduceValue
+            let finalReferenceW = referenceWidth - reduceValue
             calcResult = currentWidth / finalReferenceW * value
         case .flexibleHeight:
             let currentHeight = Config.Screen.height - reduceValue
-            let finalReferenceH = referenceH - reduceValue
+            let finalReferenceH = referenceHeight - reduceValue
             calcResult = currentHeight / finalReferenceH * value * fitMultiple
         case .forceHeight:
             let currentHeight = Config.Screen.height - reduceValue
-            let finalReferenceH = referenceH - reduceValue
+            let finalReferenceH = referenceHeight - reduceValue
             calcResult = currentHeight / finalReferenceH * value
         case .flexibleSafeAreaCenterHeight:
+            let referenceSafeAreaCenterHeight = self.fetchReferenceSafeAreaCenterHeight(
+                isIPhoneXSeriesHeight: isIPhoneXSeriesHeight,
+                referenceHeight: referenceHeight
+            )
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaCenterHeight - reduceValue
             let finalReferenceH = referenceSafeAreaCenterHeight - reduceValue
             calcResult = currentHeight / finalReferenceH * value * fitMultiple
         case .forceSafeAreaCenterHeight:
+            let referenceSafeAreaCenterHeight = self.fetchReferenceSafeAreaCenterHeight(
+                isIPhoneXSeriesHeight: isIPhoneXSeriesHeight,
+                referenceHeight: referenceHeight
+            )
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaCenterHeight - reduceValue
             let finalReferenceH = referenceSafeAreaCenterHeight - reduceValue
             calcResult = currentHeight / finalReferenceH * value
         case .flexibleSafeAreaWithoutTopHeight:
+            let referenceSafeAreaWithoutTopHeight = self.fetchReferenceSafeAreaWithoutTopHeight(
+                isIPhoneXSeriesHeight: isIPhoneXSeriesHeight,
+                referenceHeight: referenceHeight
+            )
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight - reduceValue
             let finalReferenceH = referenceSafeAreaWithoutTopHeight - reduceValue
             calcResult = currentHeight / finalReferenceH * value * fitMultiple
         case .forceSafeAreaWithoutTopHeight:
+            let referenceSafeAreaWithoutTopHeight = self.fetchReferenceSafeAreaWithoutTopHeight(
+                isIPhoneXSeriesHeight: isIPhoneXSeriesHeight,
+                referenceHeight: referenceHeight
+            )
             let currentHeight = Config.Screen.iPhoneXSeriesSafeAreaWithoutTopHeight - reduceValue
             let finalReferenceH = referenceSafeAreaWithoutTopHeight - reduceValue
             calcResult = currentHeight / finalReferenceH * value
@@ -209,6 +253,24 @@ import UIKit
         case .forceSafeAreaWithoutTopHeight: return font∥-
         default: return font
         }
+    }
+    
+    /// 获取中间安全区域参照高度
+    fileprivate func fetchReferenceSafeAreaCenterHeight(
+        isIPhoneXSeriesHeight: Bool = SwiftyFitsize.shared.isIPhoneXSeriesHeight,
+        referenceHeight: CGFloat = SwiftyFitsize.shared.referenceH
+    ) -> CGFloat {
+        if !isIPhoneXSeriesHeight { return referenceHeight }
+        return referenceHeight - Config.Screen.safeAreaTopMargin - Config.Screen.safeAreaBottomMargin
+    }
+    
+    /// 获取仅去除顶部后的安全区域参照高度
+    fileprivate func fetchReferenceSafeAreaWithoutTopHeight(
+        isIPhoneXSeriesHeight: Bool = SwiftyFitsize.shared.isIPhoneXSeriesHeight,
+        referenceHeight: CGFloat = SwiftyFitsize.shared.referenceH
+    ) -> CGFloat {
+        if !isIPhoneXSeriesHeight { return referenceHeight }
+        return referenceHeight - Config.Screen.safeAreaTopMargin
     }
 }
 
