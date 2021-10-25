@@ -126,6 +126,9 @@ import UIKit
     /// - Parameters:
     ///   - size: 大小
     ///   - fitType: 适配方式
+    ///   - referenceWidth: 参照的宽度
+    ///   - referenceHeight: 参照的高度
+    ///   - isIPhoneXSeriesHeight: 参照的高度是否为iPhoneX系列
     ///   - reduceValue: 要额外减少的数值
     ///   - calcResultType: 计算结果类型（默认: 跟随全局配置）
     /// - Returns: 适配后的数值
@@ -153,6 +156,9 @@ import UIKit
     /// - Parameters:
     ///   - value: 需要适配的数值
     ///   - fitType: 适配方式
+    ///   - referenceWidth: 参照的宽度
+    ///   - referenceHeight: 参照的高度
+    ///   - isIPhoneXSeriesHeight: 参照的高度是否为iPhoneX系列
     ///   - reduceValue: 减少的数值（默认: 0）
     ///   - calcResultType: 计算结果类型（默认: 跟随全局配置）
     /// - Returns: 适配后的数值
