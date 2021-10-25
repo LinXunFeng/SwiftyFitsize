@@ -78,6 +78,7 @@ class LandscapeViewController: UIViewController {
             make.height.equalTo(20)
             make.left.equalTo(0).offset(leftMargin)
             make.width.equalTo(refWidth∥= * 0.5)
+//            make.width.equalTo(SwiftyFitsize.fit(size: refWidth, fitType: .flexibleSafeAreaCenterHeight, referenceHeight: 667) * 0.5)
         }
         view2.snp.makeConstraints { make in
             make.width.height.equalTo(view1)
@@ -91,6 +92,7 @@ class LandscapeViewController: UIViewController {
             make.top.equalTo(view1.snp.bottom).offset(8)
             make.height.equalTo(view1)
             make.width.equalTo(refWidth∥ * 0.5)
+//            make.width.equalTo(SwiftyFitsize.fit(size: refWidth, fitType: .flexibleHeight, referenceHeight: 667) * 0.5)
         }
         view4.snp.makeConstraints { make in
             make.top.equalTo(view3).offset(2)
@@ -103,6 +105,7 @@ class LandscapeViewController: UIViewController {
             make.left.equalToSuperview().offset(leftBangMargin)
             make.height.equalTo(view1)
             make.width.equalTo(refWidth∥- * 0.5)
+//            make.width.equalTo(SwiftyFitsize.fit(size: refWidth, fitType: .flexibleSafeAreaWithoutTopHeight, referenceHeight: 667) * 0.5)
             make.bottom.equalTo(view6.snp.bottom).offset(-2)
         }
         view6.snp.makeConstraints { make in

@@ -68,6 +68,8 @@ class PortraitViewController: UIViewController {
         view1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(topMargin)
             make.height.equalTo(refHeight∥= * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .flexibleSafeAreaCenterHeight, referenceHeight: 667) * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .forceSafeAreaCenterHeight, referenceHeight: 667) * 0.5)
             make.width.equalTo(50)
             make.left.equalTo(5)
         }
@@ -83,6 +85,9 @@ class PortraitViewController: UIViewController {
             make.top.equalToSuperview()
             make.width.equalTo(view1)
             make.height.equalTo(refHeight∥ * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .flexibleHeight, referenceHeight: 667) * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .forceHeight, referenceHeight: 667) * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .flexibleHeight, referenceHeight: 667) * 0.5)
         }
         view4.snp.makeConstraints { make in
             make.top.equalTo(view3.snp.bottom)
@@ -96,6 +101,8 @@ class PortraitViewController: UIViewController {
             make.right.equalToSuperview().offset(-5)
             make.width.equalTo(view1)
             make.height.equalTo(refHeight∥- * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .flexibleSafeAreaWithoutTopHeight, referenceHeight: 667) * 0.5)
+//            make.height.equalTo(SwiftyFitsize.fit(size: refHeight, fitType: .forceSafeAreaWithoutTopHeight, referenceHeight: 667) * 0.5)
         }
         view6.snp.makeConstraints { make in
             make.top.equalTo(view5.snp.bottom)

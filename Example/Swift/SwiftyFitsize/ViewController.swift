@@ -28,6 +28,18 @@ struct Fit {
     @WrappedSwiftyFitsize(reduceValue: Metric.tableViewLeftRightMargin * 2) // fitType 默认值是 .flexibleWidth
     static var width: CGFloat = 375
     // 375是初始化值，没有特殊意义，只为调用 Fit.width 时可以取到值，如果用不到 Fit.width 的值可以不进行初始化
+   
+//    @WrappedSwiftyFitsize(fitType: .flexibleWidth, referenceWidth: 375, calcResultType: .raw)
+//    static var testW: CGFloat = 375
+//
+//    @WrappedSwiftyFitsize(fitType: .flexibleHeight, referenceHeight: 667, calcResultType: .raw)
+//    static var testH: CGFloat = 667
+    
+     @WrappedSwiftyFitsize(fitType: .flexibleWidth, referenceWidth: 414, calcResultType: .raw)
+     static var testW: CGFloat = 375
+    
+     @WrappedSwiftyFitsize(fitType: .flexibleSafeAreaWithoutTopHeight, referenceHeight: 896, isIPhoneXSeriesHeight: true, calcResultType: .raw)
+     static var testH: CGFloat = 896
 }
 
 class ViewController: UIViewController {
@@ -197,6 +209,14 @@ extension ViewController {
         )
         print("适配后的值 eVal -- \(eVal)")
         print("============")
+        
+        print("safeAreaInsets -- \(SwiftyFitsize.Config.Device.getSafeAreaInsets())")
+        
+        Fit.testW = 414
+        print("testW -- \(Fit.testW)")
+        
+        Fit.testH = 896
+        print("testH -- \(Fit.testH)")
     }
 }
 
