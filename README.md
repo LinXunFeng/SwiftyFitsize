@@ -28,6 +28,16 @@ pod 'SwiftyFitsize'
 
 
 
+- Swift Package Manager
+
+```
+1. File > Add Packages
+2. Search https://github.com/LinXunFeng/SwiftyFitsize.git
+3. Select "Up to Next Major" with "1.4.1"
+```
+
+
+
 ## Exhibition
 
 ![iPhone](https://github.com/LinXunFeng/SwiftyFitsize/raw/master/Screenshots/exhibition.png)
@@ -198,6 +208,16 @@ enum SwiftyFitType: Int {
 ```objc
 @import SwiftyFitsize;
 ```
+
+> 注：如果你使用的是 `SPM` 添加的依赖，且需要使用到宏（如：`SF_Float`），
+>
+> 则需要导入 `SwiftyFitsizeOCSupport` ，而 `SwiftyFitsize` 可以不导入。
+
+```objc
+@import SwiftyFitsizeOCSupport;
+```
+
+
 
 - 修改 `参照宽度` 、`参照高度`、`是否为iPhoneX系列的参照高度`与 `iPadFitMultiple`  
 
