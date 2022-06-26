@@ -39,6 +39,7 @@ playground.xcworkspace
 # Package.pins
 # Package.resolved
 .build/
+.swiftpm
 
 # CocoaPods
 #
@@ -68,3 +69,9 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# AppCode
+.idea
+
+# VSCode
+.vscode/settings.json

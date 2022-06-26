@@ -1,5 +1,7 @@
 use_frameworks!
 
+project 'SwiftyFitsize.xcodeproj'
+
 target 'SwiftyFitsize_OC' do
     pod 'SwiftyFitsize', :path => '../'
 end
@@ -7,7 +9,6 @@ end
 target 'SwiftyFitsize_Swift' do
   pod 'SwiftyFitsize', :path => '../'
   
-  pod 'LXFProtocolTool/LXFNibloadable'
   pod 'SnapKit'
 
   target 'SwiftyFitsize_SwiftTests' do

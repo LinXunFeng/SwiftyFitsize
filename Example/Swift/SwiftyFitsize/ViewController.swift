@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyFitsize
-import LXFProtocolTool
 import SnapKit
 
 struct Metric {
@@ -128,9 +127,10 @@ class ViewController: UIViewController {
             make.left.equalTo(rowCenterView.snp.right)
         }
         
-        let fitsizeView = FitsizeView.loadFromNib()
-        self.view.addSubview(fitsizeView)
-        fitsizeView.frame = CGRect(x: 0, y: redViewFrame~.maxY + Metric.tableViewHeight, width: 328~, height: 298~)
+        if let fitsizeView = UINib(nibName: String(describing: FitsizeView.self), bundle: nil).instantiate(withOwner: nil, options: nil).first as? FitsizeView {
+            self.view.addSubview(fitsizeView)
+            fitsizeView.frame = CGRect(x: 0, y: redViewFrame~.maxY + Metric.tableViewHeight, width: 328~, height: 298~)
+        }
         
         portraitBtn.snp.makeConstraints { make in
             make.left.equalTo(redView.snp.right).offset(5)

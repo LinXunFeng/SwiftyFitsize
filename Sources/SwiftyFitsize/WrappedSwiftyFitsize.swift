@@ -5,6 +5,7 @@
 //  Created by LinXunFeng on 2021/8/21.
 //
 
+import CoreGraphics
 import Foundation
 
 @propertyWrapper

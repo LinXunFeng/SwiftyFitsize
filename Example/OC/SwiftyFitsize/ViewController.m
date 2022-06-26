@@ -9,6 +9,11 @@
 #import "ViewController.h"
 @import SwiftyFitsize;
 
+// 如果是SPM集成，在OC中使用宏需要额外 @import SwiftyFitsizeOCSupport;
+#if __has_include(<SwiftyFitsizeOCSupport/SwiftyFitsize.h>)
+@import SwiftyFitsizeOCSupport;
+#endif
+
 #define kFitWidth(value) \
 [SwiftyFitsize fitWithSize:value fitType:SwiftyFitTypeFlexibleWidth reduceValue:20]
 
