@@ -36,7 +36,7 @@ extension SwiftyFitsize {
         
         // MARK: Device
         public struct Device {
-            public static let isIPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
+            public static let isIPad = UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
             public static let isIphneXSeries = isIPhoneXSeries()
             
             public static func getCurrentWindow() -> UIWindow? {

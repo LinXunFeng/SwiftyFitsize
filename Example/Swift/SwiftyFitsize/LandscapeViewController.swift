@@ -72,7 +72,8 @@ class LandscapeViewController: UIViewController {
         //  ∥ 则不会
         
         // 适配安全区域内的高度，请使用 ∣= or ∥=
-        let view1TopMargin = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ? 100 : 50
+        let isIPad = SwiftyFitsize.Config.Device.isIPad
+        let view1TopMargin = isIPad ? 100 : 50
         view1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(view1TopMargin)
             make.height.equalTo(20)
