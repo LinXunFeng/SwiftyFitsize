@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyFitsize'
-  s.version          = '1.4.1'
+  s.version          = '1.4.2'
   s.summary          = '📱 Swifty screen adaptation solution'
   s.homepage         = 'https://github.com/LinXunFeng/SwiftyFitsize'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
