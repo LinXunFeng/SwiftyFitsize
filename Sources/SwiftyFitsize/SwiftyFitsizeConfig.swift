@@ -40,15 +40,18 @@ extension SwiftyFitsize {
             public static let isIphneXSeries = isIPhoneXSeries()
             
             public static func getCurrentWindow() -> UIWindow? {
-                if let window = UIApplication.shared.delegate?.window {
-                    return window
-                }
-                if #available(iOS 13.0, *) {
-                    if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first {
-                        return window
-                    }
-                }
-                return UIApplication.shared.keyWindow
+              if let applicationWindow = UIApplication.shared.delegate?.window ?? nil {
+                  return applicationWindow
+              }
+              if #available(iOS 13.0, *) {
+                  if let scene = UIApplication.shared.connectedScenes.first(where: { $0.session.role == .windowApplication }),
+                     let sceneDelegate = scene.delegate as? UIWindowSceneDelegate,
+                     let window = sceneDelegate.window as? UIWindow
+                  {
+                      return window
+                  }
+              }
+              return UIApplication.shared.keyWindow
             }
             
             /// 是否是iphoneX系列
