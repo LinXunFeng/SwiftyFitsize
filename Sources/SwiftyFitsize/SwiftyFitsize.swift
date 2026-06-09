@@ -296,6 +296,9 @@ public postfix func ~ (value: Int) -> CGFloat {
 public postfix func ~ (value: Float) -> CGFloat {
     return CGFloat(value).sf(.flexibleWidth)
 }
+public postfix func ~ (value: Double) -> CGFloat {
+    return CGFloat(value).sf(.flexibleWidth)
+}
 public postfix func ~ (value: CGPoint) -> CGPoint {
     return value.sf(.flexibleWidth)
 }
@@ -321,6 +324,9 @@ public postfix func ≈ (value: Int) -> CGFloat {
     return CGFloat(value).sf(.forceWidth)
 }
 public postfix func ≈ (value: Float) -> CGFloat {
+    return CGFloat(value).sf(.forceWidth)
+}
+public postfix func ≈ (value: Double) -> CGFloat {
     return CGFloat(value).sf(.forceWidth)
 }
 public postfix func ≈ (value: CGPoint) -> CGPoint {
@@ -350,6 +356,9 @@ public postfix func ∣ (value: Int) -> CGFloat {
 public postfix func ∣ (value: Float) -> CGFloat {
     return CGFloat(value).sf(.flexibleHeight)
 }
+public postfix func ∣ (value: Double) -> CGFloat {
+    return CGFloat(value).sf(.flexibleHeight)
+}
 public postfix func ∣ (value: CGPoint) -> CGPoint {
     return value.sf(.flexibleHeight)
 }
@@ -375,6 +384,9 @@ public postfix func ∥ (value: Int) -> CGFloat {
     return CGFloat(value).sf(.forceHeight)
 }
 public postfix func ∥ (value: Float) -> CGFloat {
+    return CGFloat(value).sf(.forceHeight)
+}
+public postfix func ∥ (value: Double) -> CGFloat {
     return CGFloat(value).sf(.forceHeight)
 }
 public postfix func ∥ (value: CGPoint) -> CGPoint {
@@ -404,6 +416,9 @@ public postfix func ∣= (value: Int) -> CGFloat {
 public postfix func ∣= (value: Float) -> CGFloat {
     return CGFloat(value).sf(.flexibleSafeAreaCenterHeight)
 }
+public postfix func ∣= (value: Double) -> CGFloat {
+    return CGFloat(value).sf(.flexibleSafeAreaCenterHeight)
+}
 public postfix func ∣= (value: CGPoint) -> CGPoint {
     return value.sf(.flexibleSafeAreaCenterHeight)
 }
@@ -429,6 +444,9 @@ public postfix func ∥= (value: Int) -> CGFloat {
     return CGFloat(value).sf(.forceSafeAreaCenterHeight)
 }
 public postfix func ∥= (value: Float) -> CGFloat {
+    return CGFloat(value).sf(.forceSafeAreaCenterHeight)
+}
+public postfix func ∥= (value: Double) -> CGFloat {
     return CGFloat(value).sf(.forceSafeAreaCenterHeight)
 }
 public postfix func ∥= (value: CGPoint) -> CGPoint {
@@ -458,6 +476,9 @@ public postfix func ∣- (value: Int) -> CGFloat {
 public postfix func ∣- (value: Float) -> CGFloat {
     return CGFloat(value).sf(.flexibleSafeAreaWithoutTopHeight)
 }
+public postfix func ∣- (value: Double) -> CGFloat {
+    return CGFloat(value).sf(.flexibleSafeAreaWithoutTopHeight)
+}
 public postfix func ∣- (value: CGPoint) -> CGPoint {
     return value.sf(.flexibleSafeAreaWithoutTopHeight)
 }
@@ -483,6 +504,9 @@ public postfix func ∥- (value: Int) -> CGFloat {
     return CGFloat(value).sf(.forceSafeAreaWithoutTopHeight)
 }
 public postfix func ∥- (value: Float) -> CGFloat {
+    return CGFloat(value).sf(.forceSafeAreaWithoutTopHeight)
+}
+public postfix func ∥- (value: Double) -> CGFloat {
     return CGFloat(value).sf(.forceSafeAreaWithoutTopHeight)
 }
 public postfix func ∥- (value: CGPoint) -> CGPoint {
