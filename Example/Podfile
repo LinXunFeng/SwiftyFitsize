@@ -20,5 +20,5 @@ end
 
 target 'SwiftyFitsize_Scene' do
     pod 'SwiftyFitsize', :path => '../'
-    pod 'SnapKit'
+    pod 'SnapKit', '~> 5.7.1'
 end
